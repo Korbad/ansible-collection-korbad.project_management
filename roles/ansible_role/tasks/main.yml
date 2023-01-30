@@ -1,0 +1,13 @@
+---
+- name: Ensure role namespace directory exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ user_roles_path }}"
+
+- name: Ensure symlink exists between role project directory and ansible role path
+  ansible.builtin.file:
+    path: "{{ user_roles_path }}/{{ fully_qualified_role_name }}"
+    state: link
+    src: "{{ source_path }}"
+    force: yes
+  when: fully_qualified_role_name is defined

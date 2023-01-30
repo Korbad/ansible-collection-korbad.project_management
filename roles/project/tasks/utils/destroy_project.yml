@@ -1,0 +1,5 @@
+---
+- name: Destroying file at {{ project_path }}
+  file:
+    state: absent
+    path: "{{ project_path }}"

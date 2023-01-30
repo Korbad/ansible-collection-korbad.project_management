@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  vars:
+    execution_environment_name: awx1
+    ee_base_path: /home/josh/managed_github_repos/Korbad/ansible_playbooks/docker_host
+  tasks:
+  - name: Execute ansible-builder build
+    command:
+      cmd: ansible-builder build --tag {{ execution_environment_name }}
+      chdir: "{{ ee_base_path }}"

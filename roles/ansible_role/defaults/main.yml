@@ -1,0 +1,2 @@
+---
+user_roles_path: "{{ (ansible_env.HOME, '.ansible', 'roles') | path_join }}"

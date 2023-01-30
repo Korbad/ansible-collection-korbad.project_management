@@ -1,0 +1,12 @@
+---
+- name: Ensure the src directory exists for git repo
+  file:
+    state: directory
+    path: "{{ source_path }}"
+
+- name: Ensure clone of remote repo exists locally
+  ansible.builtin.git:
+    dest: "{{ source_path }}"
+    repo: "{{ git_url }}"
+    force: false
+    update: false

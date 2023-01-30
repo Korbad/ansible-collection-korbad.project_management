@@ -1,0 +1,2 @@
+---
+source_path: "{{ (project_path, 'src') | path_join }}"

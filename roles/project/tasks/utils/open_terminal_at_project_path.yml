@@ -1,0 +1,5 @@
+---
+- name: Opening gnome-terminal at project_path {{ project_path }}
+  command:
+    cmd: gnome-terminal & disown
+    chdir: "{{ project_path }}"

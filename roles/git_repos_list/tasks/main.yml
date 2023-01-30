@@ -1,0 +1,10 @@
+---
+- name: For each git_url in git_repos_list, execute 'git_repo' role
+  ansible.builtin.include_role:
+    name: git_repo
+  loop: "{{ git_repos_list }}"
+  loop_control:
+    label: "{{ git_repo.git_url }}"
+    loop_var: git_repo
+  vars:
+    git_url: "{{ git_repo.git_url }}"

@@ -1,0 +1,13 @@
+---
+- name: For each collection in ansible_collections_list, execute 'ansible_collection' role
+  include_role:
+    name: ansible_collection
+  loop: "{{ ansible_collections_list }}"
+  loop_control:
+    label: "{{ collection.git_url }}"
+    loop_var: collection
+  vars:
+    git_url: "{{ collection.git_url }}"
+    collection_name: "{{ collection.collection_name }}"
+    collection_namespace: "{{ collection.collection_namespace }}"
+  when: ansible_collections_list is defined and ansible_collections_list is iterable

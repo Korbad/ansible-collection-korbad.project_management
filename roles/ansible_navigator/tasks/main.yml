@@ -1,0 +1,11 @@
+---
+# https://ansible-navigator.readthedocs.io/en/latest/faq/
+# https://ansible-navigator.readthedocs.io/en/latest/
+- name: Ensure ansible-navigator is installed
+  pip:
+    name: ansible-navigator
+    extra_args: --user
+
+- name: Template config file
+  template:
+    path: 

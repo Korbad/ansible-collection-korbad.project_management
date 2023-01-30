@@ -1,0 +1,5 @@
+---
+ansible_navigator_artifact_path: "{{ (ansible_env.HOME, 'managed_ansible_navigator_artifacts') | path_join }}"
+ansible_runner_artifact_directory: "{{ (ansible_navigator_artifact_path, 'ansible_runner_artifacts') | path_join }}"
+ansible_builder_artifact_directory: "{{ (ansible_navigator_artifact_path, 'ansible_builder_artifacts') | path_join }}"
+image: 'quay.io/ansible/ansible-runner:latest'
