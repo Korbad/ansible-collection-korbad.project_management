@@ -10,3 +10,4 @@
     repo: "{{ git_url }}"
     force: false
     update: false
+    version: "{{ version | default(omit, True) }}"
