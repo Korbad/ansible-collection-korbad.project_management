@@ -8,3 +8,4 @@
     loop_var: git_repo
   vars:
     git_url: "{{ git_repo.git_url }}"
+    version: "{{ git_repo.version }}"
