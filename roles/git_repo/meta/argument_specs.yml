@@ -2,7 +2,7 @@
 argument_specs:
   main:
     options:
-      fully_qualified_role_name:
-        type: str
       git_url:
+        type: str
+      project_path:
         type: str

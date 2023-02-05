@@ -9,4 +9,4 @@
   vars:
     git_url: "{{ role.git_url }}"
     fully_qualified_role_name: "{{ role.fully_qualified_role_name }}"
-  when: ansible_roles_list is defined and ansible_roles_list is iterable and fully_qualified_role_name is defined
+  when: ansible_roles_list is defined and ansible_roles_list is iterable

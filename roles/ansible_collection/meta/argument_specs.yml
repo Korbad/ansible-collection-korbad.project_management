@@ -8,3 +8,5 @@ argument_specs:
         type: str
       project_path:
         type: str
+      source_path:
+        type: str

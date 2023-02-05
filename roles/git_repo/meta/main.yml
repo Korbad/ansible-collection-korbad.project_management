@@ -1,5 +1,4 @@
 ---
 dependencies:
   - role: project
-    git_url: "{{ git_url }}"
 allow_duplicates: true
