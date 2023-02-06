@@ -1,0 +1,18 @@
+---
+- name: Find git repos in project path
+  find:
+    file_type: directory
+    paths: "{{ managed_projects_path }}"
+    recurse: true
+    hidden: true
+    patterns: .git
+  register: git_repos
+
+- name: For each repo found, perform safe purge
+  include_tasks: safe_purge.yml
+  loop: "{{ git_repos.files }}"
+  loop_control:
+    loop_var: git_repo
+    label: "{{ git_repo.path }}"
+  vars:
+    source_path: "{{ git_repo.path | dirname }}"

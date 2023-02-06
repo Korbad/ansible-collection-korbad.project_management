@@ -1,0 +1,6 @@
+---
+- name: Start git check loop and open VSCode interactively for user
+  include_tasks: interactive/check_vscode_loop.yml
+
+- name: Perform check and PURGE
+  include_tasks: check_and_purge.yml

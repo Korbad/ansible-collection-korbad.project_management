@@ -1,0 +1,24 @@
+---
+- name: Execute git status and diff checks
+  include_tasks: check_repo.yml
+
+- name: Get current branch name
+  command:
+    cmd: git symbolic-ref --short HEAD
+    chdir: "{{ source_path }}"
+  register: symbolic_ref
+
+- name: PURGE
+  command:
+    cmd: git branch --delete {{ symbolic_ref.stdout }}
+    chdir: "{{ source_path }}"
+  # debug:
+    # msg: "PURGING git branch --delete {{ symbolic_ref.stdout }}"
+  when:
+  - git_diff.stdout is defined
+  - not git_diff.stdout | length > 0
+  - not git_diff.stderr | length > 0
+  - symbolic_ref is defined
+
+
+  # git push origin --all --dry-run
