@@ -29,8 +29,14 @@
   include_tasks: open_vscode.yml
   when: "'Untracked files' in git_status.stdout"
 
-- name: Delete git branch
+- name: git branch
   command:
-    cmd: git branch -a
+    cmd: git branch -l
+    chdir: "{{ source_path }}"
+  register: git_branches
+
+- name: git branch no-merged
+  command:
+    cmd: git branch -l --no-merged
     chdir: "{{ source_path }}"
   register: git_branches
