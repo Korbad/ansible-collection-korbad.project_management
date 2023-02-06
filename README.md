@@ -10,3 +10,8 @@ Automation will:
 2. symlink the korbad.project_management collectionn into your ~/.ansible collections path
 
 Human:  delete the repo copy which you manually git-cloned
+
+# Ansible Pull method (might not be allowed by network policies)
+
+```ansible-pull -U git@github.com:Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge```
+
