@@ -1,10 +1,4 @@
 ---
-# - name: Get git repo status
-#   git:
-#     repo: "{{ source_path }}"
-#     clone: false
-#   register: git_status
-
 - name: Get git fetch {{ source_path }}
   command:
     cmd: git fetch
@@ -19,15 +13,10 @@
 
 - name: Open vscode so the user can stage/delete changes
   include_tasks: open_vscode.yml
-  when: "'Changes not staged for commit' in git_status.stdout"
-
-- name: Open vscode so the user can push staged changes
-  include_tasks: open_vscode.yml
-  when: "'Your branch is ahead' in git_status.stdout"
-
-- name: Open vscode so the user can deal with untracked files
-  include_tasks: open_vscode.yml
-  when: "'Untracked files' in git_status.stdout"
+  when: >
+    'Changes not staged for commit' in git_status.stdout
+    or 'Your branch is ahead' in git_status.stdout
+    or 'Untracked files' in git_status.stdout
 
 - name: git branch
   command:
@@ -39,4 +28,10 @@
   command:
     cmd: git branch -l --no-merged
     chdir: "{{ source_path }}"
-  register: git_branches
+  register: git_branches_nomerged
+
+- name: git diff for current branch to remote
+  command:
+    cmd: git diff @{u}
+    chdir: "{{ source_path }}"
+  register: git_diff
