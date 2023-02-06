@@ -18,6 +18,7 @@
   when:
   - git_diff.stdout is defined
   - not git_diff.stdout | length > 0
+  - not git_diff.stderr | length > 0
   - symbolic_ref is defined
 
 
