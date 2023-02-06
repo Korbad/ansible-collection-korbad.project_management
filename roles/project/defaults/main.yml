@@ -2,4 +2,5 @@
 managed_projects_directory_name: managed_projects
 managed_projects_path: "{{ (ansible_env.HOME, managed_projects_directory_name) | path_join }}"
 slugified_git_url: "{{ git_url | regex_replace('[^a-zA-Z0-9-]','-') }}"
-project_path: "{{ (managed_projects_path, slugified_git_url) | path_join }}"
+directory_name: "{{ directory_name | default(slugified_git_url, True) }}
+project_path: "{{ (managed_projects_path, directory_name) | path_join }}"
