@@ -1,0 +1,20 @@
+---
+- name: Bootstraps this ansible collection itself
+  hosts: localhost
+  vars:
+    project_management_dir: "{{ (playbook_dir, 'korbad.project_management') | path_join }}"
+  tasks:
+  - name: Create tmp dir for korbad.project_management collection
+    file:
+      state: directory
+      path: "{{ project_management_dir }}"
+
+  - name: Clone git repo
+    git:
+      repo: git@github.com:Korbad/ansible-collection-korbad.project_management.git
+      dest: "{{ project_management_dir }}"
+
+  - name: Use the korbad.project_management collection to manage an instance of the korbad.project_management project itself
+    command:
+      cmd: ansible-playbook bootstrap_localhost_current_user.yml
+      chdir: "{{ project_management_dir }}"
