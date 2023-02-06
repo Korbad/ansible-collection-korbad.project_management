@@ -13,7 +13,7 @@
 
 - name: git diff for current branch to remote
   command:
-    cmd: git diff @{u}
+    cmd: git diff @{u} --numstat
     chdir: "{{ source_path }}"
   register: git_diff
   failed_when: false

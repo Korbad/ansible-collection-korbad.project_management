@@ -2,11 +2,5 @@
 - name: Start git check loop and open VSCode interactively for user
   include_tasks: interactive/check_vscode_loop.yml
 
-- name: Execute git status and diff checks
-  include_tasks: check_repo.yml
-
-- name: PURGE
-  debug:
-    msg: "PURGING {{ source_path }}"
-  when:
-  - git_diff.rc == 0
+- name: Perform check and PURGE
+  include_tasks: check_and_purge.yml

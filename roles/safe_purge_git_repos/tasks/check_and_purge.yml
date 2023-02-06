@@ -1,0 +1,10 @@
+---
+- name: Execute git status and diff checks
+  include_tasks: check_repo.yml
+
+- name: PURGE
+  debug:
+    msg: "PURGING {{ source_path }}"
+  when:
+  - git_diff.stdout is defined
+  - not git_diff.stdout | length > 0
