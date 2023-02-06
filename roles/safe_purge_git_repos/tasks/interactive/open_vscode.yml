@@ -7,4 +7,4 @@
       DISPLAY: ":0"
 
 - name: Include the safe_purge tasks (forming an infinite loop)
-  include_tasks: safe_purge.yml
+  include_tasks: check_vscode_loop.yml

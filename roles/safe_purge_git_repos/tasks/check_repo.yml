@@ -1,0 +1,19 @@
+---
+- name: Get git fetch {{ source_path }}
+  command:
+    cmd: git fetch
+    chdir: "{{ source_path }}"
+  register: git_fetch
+
+- name: Get git status {{ source_path }}
+  command:
+    cmd: git status
+    chdir: "{{ source_path }}"
+  register: git_status
+
+- name: git diff for current branch to remote
+  command:
+    cmd: git diff @{u}
+    chdir: "{{ source_path }}"
+  register: git_diff
+  failed_when: false

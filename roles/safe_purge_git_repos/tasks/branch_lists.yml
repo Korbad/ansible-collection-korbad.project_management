@@ -1,0 +1,12 @@
+---
+- name: git branch
+  command:
+    cmd: git branch -l
+    chdir: "{{ source_path }}"
+  register: git_branches
+
+- name: git branch no-merged
+  command:
+    cmd: git branch -l --no-merged
+    chdir: "{{ source_path }}"
+  register: git_branches_nomerged
