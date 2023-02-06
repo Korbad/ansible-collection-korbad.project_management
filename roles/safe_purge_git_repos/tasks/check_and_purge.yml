@@ -3,8 +3,13 @@
   include_tasks: check_repo.yml
 
 - name: PURGE
+  # command:
+    # cmd: git branch --delete
   debug:
     msg: "PURGING {{ source_path }}"
   when:
   - git_diff.stdout is defined
   - not git_diff.stdout | length > 0
+
+
+  # git push origin --all --dry-run
