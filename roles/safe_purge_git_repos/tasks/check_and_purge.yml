@@ -2,7 +2,6 @@
 - name: Execute git status and diff checks
   include_tasks: check_repo.yml
 
-
 - name: Get current branch name
   command:
     cmd: git symbolic-ref --short HEAD
