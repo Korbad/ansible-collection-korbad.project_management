@@ -11,12 +11,20 @@
     chdir: "{{ source_path }}"
   register: git_status
 
+- name: git diff for current branch to remote
+  command:
+    cmd: git diff @{u}
+    chdir: "{{ source_path }}"
+  register: git_diff
+  failed_when: false
+
 - name: Open vscode so the user can stage/delete changes
   include_tasks: open_vscode.yml
   when: >
     'Changes not staged for commit' in git_status.stdout
     or 'Your branch is ahead' in git_status.stdout
     or 'Untracked files' in git_status.stdout
+    or git_diff.rc != 0
 
 - name: git branch
   command:
@@ -29,13 +37,3 @@
     cmd: git branch -l --no-merged
     chdir: "{{ source_path }}"
   register: git_branches_nomerged
-
-- block:
-  - name: git diff for current branch to remote
-    command:
-      cmd: git diff @{u}
-      chdir: "{{ source_path }}"
-    register: git_diff
-  rescue:
-  - name: Open vscode so the user can stage/delete changes
-    include_tasks: open_vscode.yml
