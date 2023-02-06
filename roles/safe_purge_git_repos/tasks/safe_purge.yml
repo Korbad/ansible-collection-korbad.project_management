@@ -17,8 +17,10 @@
     chdir: "{{ source_path }}"
   register: git_status
 
-- name: Include the open_vscode task so the user can clean open git repo
+- name: Open vscode so the user can stage/delete changes
   include_tasks: open_vscode.yml
   when: "'Changes not staged for commit' in git_status.stdout"
 
-  # when: "'Your branch is behind' in git_status.stdout"
+- name: Open vscode so the user can push staged changes
+  include_tasks: open_vscode.yml
+  when: "'Your branch is ahead' in git_status.stdout"
