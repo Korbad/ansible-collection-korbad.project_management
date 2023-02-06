@@ -5,6 +5,7 @@
 - name: PURGE
   command:
     cmd: git branch --delete
+    chdir: "{{ source_path }}"
   # debug:
     # msg: "PURGING {{ source_path }}"
   when:
