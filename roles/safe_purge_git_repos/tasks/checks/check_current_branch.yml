@@ -1,0 +1,10 @@
+---
+- name: Get current branch name
+  command:
+    cmd: git symbolic-ref --short HEAD
+    chdir: "{{ source_path }}"
+  register: symbolic_ref
+
+- name: Set current branch name fact
+  set_fact:
+    checked_out_branch: "{{ symbolic_ref.stdout }}"

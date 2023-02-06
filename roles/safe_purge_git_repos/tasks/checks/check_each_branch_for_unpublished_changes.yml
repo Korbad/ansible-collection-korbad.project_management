@@ -1,0 +1,22 @@
+---
+- name: Create fact for the list of branches on this host
+  set_fact:
+    branches_dict:
+    branches_git_diff_complaints:
+
+- name: For each ref, get local (head) branches
+  command:
+    cmd: git for-each-ref --format='%(refname:short)' refs/heads/
+    chdir: "{{ source_path }}"
+  register: git_for_each_ref
+  
+- name: git diff for current branch to remote
+  include_tasks: single_branch/check_branch_for_unpublished_changes.yml
+  loop: "{{ git_for_each_ref.stdout_lines }}"
+  loop_control:
+    loop_var: branch
+
+- name: Set fact for total changes between staged and remote commits
+  set_fact:
+    unpublished_changes_sum: "{{ branches_dict | dict2items | map(attribute='value') | map('int') | sum }}"
+    any_git_diff_complaints: "{{ branches_git_diff_complaints | dict2items | map(attribute='value') | bool }}"

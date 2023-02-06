@@ -1,0 +1,34 @@
+---
+- name: Enter interactive loop if warranted
+  include_tasks: interactive_loop.yml
+  when:
+  - interactive_git_cleanup is defined
+  - interactive_git_cleanup | bool
+
+- name: Check entire repo before purge
+  include_tasks: checks/repo.yml
+
+- name: Pause before purge {{ source_path }}
+  pause:
+  when:
+  - not unstaged_changes_detected
+  - not untracked_files_detected
+  - not git_stash_detected
+  - unpublished_changes_sum | int == 0
+  - not any_git_diff_complaints
+  # - not ('Your branch is ahead' in git_status.stdout)
+
+- name: PURGE {{ source_path }}
+  file:
+    state: absent
+    path: "{{ source_path }}"
+  # debug:
+  #   msg: "REPO can be purged, project_path {{ source_path }}"
+  when:
+  - not unstaged_changes_detected
+  - not untracked_files_detected
+  - not git_stash_detected
+  - unpublished_changes_sum | int == 0
+  - not any_git_diff_complaints
+  # - not ('Your branch is ahead' in git_status.stdout)
+

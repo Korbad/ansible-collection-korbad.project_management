@@ -1,10 +1,7 @@
 ---
-- name: Open VSCode at {{ source_path }} and wait for user to close VSCode window
+- name: Open VSCode at {{ source_path }}
   command:
-    cmd: code -n -w .
+    cmd: code -n .
     chdir: "{{ source_path }}"
   environment:
       DISPLAY: ":0"
-
-- name: Include the safe_purge tasks (forming an infinite loop)
-  include_tasks: check_vscode_loop.yml
