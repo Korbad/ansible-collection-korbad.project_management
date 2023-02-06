@@ -5,14 +5,13 @@
 - name: Ensure collection namespace directory exists
   ansible.builtin.file:
     state: directory
-    path: "{{ (collections_path, 'ansible_collections', collection_namespace) | path_join }}"
+    path: "{{ (collections_path, 'managed_ansible_collections', collection_namespace) | path_join }}"
 
 - name: Ensure symlink exists between collection project directory and ansible collections path
   ansible.builtin.file:
     path: "{{ collection_path }}"
     state: link
     src: "{{ source_path }}"
-    force: yes
   vars:
-    collection_path: "{{ (collections_path, 'ansible_collections', collection_namespace, collection_name) | path_join }}"
+    collection_path: "{{ (collections_path, 'managed_ansible_collections', collection_namespace, collection_name) | path_join }}"
     

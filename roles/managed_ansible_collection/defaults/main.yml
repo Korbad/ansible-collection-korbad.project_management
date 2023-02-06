@@ -1,0 +1,3 @@
+---
+collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
+managed_ansible_collections_list:
