@@ -30,8 +30,12 @@
     chdir: "{{ source_path }}"
   register: git_branches_nomerged
 
-- name: git diff for current branch to remote
-  command:
-    cmd: git diff @{u}
-    chdir: "{{ source_path }}"
-  register: git_diff
+- block:
+  - name: git diff for current branch to remote
+    command:
+      cmd: git diff @{u}
+      chdir: "{{ source_path }}"
+    register: git_diff
+  rescue:
+  - name: Open vscode so the user can stage/delete changes
+    include_tasks: open_vscode.yml
