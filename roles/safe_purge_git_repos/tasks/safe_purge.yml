@@ -24,3 +24,7 @@
 - name: Open vscode so the user can push staged changes
   include_tasks: open_vscode.yml
   when: "'Your branch is ahead' in git_status.stdout"
+
+- name: Open vscode so the user can deal with untracked files
+  include_tasks: open_vscode.yml
+  when: "'Untracked files' in git_status.stdout"
