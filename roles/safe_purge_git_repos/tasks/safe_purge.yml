@@ -28,3 +28,9 @@
 - name: Open vscode so the user can deal with untracked files
   include_tasks: open_vscode.yml
   when: "'Untracked files' in git_status.stdout"
+
+- name: Delete git branch
+  command:
+    cmd: git branch -a
+    chdir: "{{ source_path }}"
+  register: git_branches
