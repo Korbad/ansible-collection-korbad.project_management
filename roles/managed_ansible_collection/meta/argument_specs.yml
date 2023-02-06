@@ -10,3 +10,9 @@ argument_specs:
         type: str
       source_path:
         type: str
+  collection_list:
+    options:
+      managed_ansible_collections_list:
+        type: list
+        required: true
+  

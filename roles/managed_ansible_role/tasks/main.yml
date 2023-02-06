@@ -12,4 +12,3 @@
     path: "{{ user_roles_path }}/{{ fully_qualified_role_name }}"
     state: link
     src: "{{ source_path }}"
-    force: yes

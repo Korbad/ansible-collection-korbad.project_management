@@ -1,0 +1,24 @@
+---
+# - name: Get git repo status
+#   git:
+#     repo: "{{ source_path }}"
+#     clone: false
+#   register: git_status
+
+- name: Get git fetch {{ source_path }}
+  command:
+    cmd: git fetch
+    chdir: "{{ source_path }}"
+  register: git_fetch
+
+- name: Get git status {{ source_path }}
+  command:
+    cmd: git status
+    chdir: "{{ source_path }}"
+  register: git_status
+
+- name: Include the open_vscode task so the user can clean open git repo
+  include_tasks: open_vscode.yml
+  when: "'Changes not staged for commit' in git_status.stdout"
+
+  # when: "'Your branch is behind' in git_status.stdout"
