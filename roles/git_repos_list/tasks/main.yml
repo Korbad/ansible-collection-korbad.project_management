@@ -8,6 +8,6 @@
     loop_var: git_repo
   vars:
     git_url: "{{ git_repo.git_url }}"
-    version: "{{ git_repo.version | default(omit, True) }}"
+    version: "{{ git_repo.version | default(omit, true) }}"
     directory_name: "{{ git_repo.directory_name }}"
   when: git_repos_list is defined
