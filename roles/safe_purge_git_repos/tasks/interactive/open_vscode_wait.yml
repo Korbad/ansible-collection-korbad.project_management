@@ -1,0 +1,10 @@
+---
+- name: Open VSCode at {{ source_path }} and wait for user to close VSCode window
+  command:
+    cmd: code -n -w .
+    chdir: "{{ source_path }}"
+  environment:
+      DISPLAY: ":0"
+
+- name: Return to interactive loop
+  include_tasks: ../interactive_loop.yml

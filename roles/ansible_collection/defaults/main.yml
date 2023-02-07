@@ -1,2 +1,0 @@
----
-collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
