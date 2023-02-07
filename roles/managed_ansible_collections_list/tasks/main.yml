@@ -10,4 +10,5 @@
     git_url: "{{ collection.git_url }}"
     collection_name: "{{ collection.collection_name }}"
     collection_namespace: "{{ collection.collection_namespace }}"
+    directory_name: "{{ collection.directory_name }}"
   when: managed_ansible_collections_list is defined and managed_ansible_collections_list is iterable
