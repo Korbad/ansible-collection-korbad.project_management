@@ -10,5 +10,5 @@
     repo: "{{ git_url }}"
     force: false
     update: false
-    version: "{{ version }}"
+    version: "{{ version | default(omit, true) }}"
     recursive: false
