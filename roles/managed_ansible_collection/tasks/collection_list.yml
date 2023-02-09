@@ -1,6 +1,7 @@
 ---
 - name: For each collection in managed_ansible_collections_list, execute 'managed_ansible_collection' role
-  include_tasks: main.yml
+  include_role:
+    name: managed_ansible_collection
   loop: "{{ managed_ansible_collections_list }}"
   loop_control:
     label: "{{ collection.git_url }}"
