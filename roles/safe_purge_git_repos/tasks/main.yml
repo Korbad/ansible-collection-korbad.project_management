@@ -16,3 +16,6 @@
     label: "{{ git_repo.path }}"
   vars:
     source_path: "{{ git_repo.path | dirname }}"
+
+- name: Purge all empty project directories
+  include_tasks: purge_empty_projects.yml
