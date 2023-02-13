@@ -1,3 +1,0 @@
----
-# this set of tasks would generate a .xml file which matches the egui/GTK4/Glade4 (?) standard
-# the .xml file would be placed in some output directory (user home, something something)

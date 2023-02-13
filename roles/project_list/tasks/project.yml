@@ -1,0 +1,6 @@
+---
+- name: Manage project directory at {{ project_path }}
+  file:
+    state: directory
+    path: "{{ project_path }}"
+    recurse: yes

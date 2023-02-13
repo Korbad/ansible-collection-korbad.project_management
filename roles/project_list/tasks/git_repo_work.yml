@@ -1,12 +1,15 @@
 ---
-- name: Ensure the src directory exists for git repo {{ source_path }}
+- name: Ensure project exists
+  include_tasks: project.yml
+
+- name: Ensure the src directory exists for git repo {{ project_path }}
   file:
     state: directory
-    path: "{{ source_path }}"
+    path: "{{ project_path }}"
 
 - name: Ensure clone of remote repo exists locally for giturl {{ git_url }}
   ansible.builtin.git:
-    dest: "{{ source_path }}"
+    dest: "{{ project_path }}"
     repo: "{{ git_url }}"
     force: false
     update: false

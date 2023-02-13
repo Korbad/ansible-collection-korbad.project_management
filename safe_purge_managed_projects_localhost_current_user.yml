@@ -1,0 +1,8 @@
+---
+- name: Manage localhost for current user on Ansible control node (localhost)
+  hosts: localhost
+  roles:
+  - name: safe_purge_git_repos
+  vars:
+    ansible_user: "{{ lookup('env', 'USER') }}"
+    ansible_connection: local

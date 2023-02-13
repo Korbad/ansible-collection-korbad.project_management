@@ -1,8 +1,0 @@
----
-argument_specs:
-  main:
-    options:
-      git_url:
-        type: str
-      project_path:
-        type: str

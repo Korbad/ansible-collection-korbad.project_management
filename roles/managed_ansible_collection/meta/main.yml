@@ -1,4 +1,0 @@
----
-dependencies:
-  - role: git_repo
-allow_duplicates: true

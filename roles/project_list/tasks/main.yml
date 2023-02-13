@@ -1,0 +1,10 @@
+---
+- name: For each project in managed_projects list
+  include_tasks: single_project.yml
+  loop: "{{ managed_projects }}"
+  loop_control:
+    label: "{{ project.git_url }}"
+    loop_var: project
+  vars:
+    git_url: "{{ project.git_url }}"
+  when: managed_projects is defined

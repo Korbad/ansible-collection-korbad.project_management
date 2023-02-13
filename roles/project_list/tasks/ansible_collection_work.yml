@@ -1,4 +1,7 @@
 ---
+- name: Ensure git repo exists
+  include_tasks: git_repo.yml
+
 - name: Purge symlinks from collection source
   include_tasks: purge_symlinks.yml
 
@@ -11,7 +14,8 @@
   ansible.builtin.file:
     path: "{{ collection_path }}"
     state: link
-    src: "{{ source_path }}"
+    src: "{{ project_path }}"
+    force: true
   vars:
     collection_path: "{{ (collections_path, 'ansible_collections', collection_namespace, collection_name) | path_join }}"
     

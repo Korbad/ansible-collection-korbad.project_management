@@ -16,6 +16,8 @@
   - not git_stash_detected
   - unpublished_changes_sum | int == 0
   - not any_git_diff_complaints
+  - interactive_git_cleanup is defined
+  - interactive_git_cleanup | bool
   # - not ('Your branch is ahead' in git_status.stdout)
 
 - name: PURGE {{ source_path }}

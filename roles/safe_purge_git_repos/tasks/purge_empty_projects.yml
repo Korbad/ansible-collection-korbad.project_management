@@ -1,5 +1,3 @@
 ---
-- name: Delete all empty folders in project_path
-  shell: "find {{ project_path }} -type d -empty -delete"
-  args:
-    warn: no
+- name: Delete all empty folders in {{ managed_projects_path }}
+  shell: "find {{ managed_projects_path }} -type d -empty -delete"

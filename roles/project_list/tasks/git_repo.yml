@@ -1,0 +1,5 @@
+---
+- name: Ensure project exists
+  include_tasks: git_repo_work.yml
+  vars:
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"

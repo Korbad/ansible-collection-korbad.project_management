@@ -17,3 +17,5 @@ Human:  delete the repo copy which you manually git-cloned
 ```ansible-pull -U git@github.com:Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge```
 
 ```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge```
+
+```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge safe_purge_managed_projects_localhost_current_user.yml```

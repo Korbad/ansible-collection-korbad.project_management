@@ -2,11 +2,11 @@
 - name: Manage localhost for current user on Ansible control node (localhost)
   hosts: localhost
   roles:
-  - name: managed_ansible_collections_list
+  - name: korbad.project_management.project_list
   vars:
+    ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
-    managed_ansible_collections_list:
+    managed_projects:
     - git_url: https://github.com/Korbad/ansible-collection-korbad.project_management.git
       collection_namespace: korbad
       collection_name: project_management
-      directory_name: ansible-collection-korbad.project_management

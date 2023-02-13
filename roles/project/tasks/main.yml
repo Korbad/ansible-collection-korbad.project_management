@@ -1,9 +1,0 @@
----
-# the intent of this is, for each project there should be a project directory
-# the project directory contains the actual project artifacts (often a git repo)
-# (e.g. an ansible collection is a type of project, a python module is a type of project, a set of playbooks for a specific topic)
-- name: Manage project directory at {{ project_path }}
-  file:
-    state: directory
-    path: "{{ project_path }}"
-    recurse: yes

@@ -1,0 +1,7 @@
+---
+- name: Ensure git repo exists
+  include_tasks: ansible_role_work.yml
+  vars:
+    project_name: "ansible-role_{{ fully_qualified_role_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+    user_roles_path: "{{ (ansible_env.HOME, '.ansible', 'roles') | path_join }}"
