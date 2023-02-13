@@ -2,7 +2,7 @@
 - name: Manage localhost for current user on Ansible control node (localhost)
   hosts: localhost
   roles:
-  - name: korbad.project_management.project_list
+  - name: project_list
   vars:
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
