@@ -21,4 +21,4 @@
     state: present
     virtualenv: "{{ managed_virtual_environments_path }}"
     virtualenv_site_packages: no
-    virtualenv_python: python3.10
+    virtualenv_python: python3.8
