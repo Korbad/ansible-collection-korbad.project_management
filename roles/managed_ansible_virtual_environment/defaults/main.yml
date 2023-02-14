@@ -1,3 +1,3 @@
 ---
 managed_virtual_environments_name: managed_virtual_environments
-managed_virtual_environments_path: "{{ (ansible_env.HOME, managed_virtual_environments_name) | path_join }}"
+managed_virtual_environments_path: "{{ ansible_env.HOME }}/{{ managed_virtual_environments_name }}"
