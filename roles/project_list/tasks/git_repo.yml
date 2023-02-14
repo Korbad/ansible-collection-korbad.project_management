@@ -1,5 +1,17 @@
 ---
 - name: Ensure project exists
-  include_tasks: git_repo_work.yml
-  vars:
-    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+  include_tasks: project.yml
+
+- name: Ensure the src directory exists for git repo {{ project_path }}
+  file:
+    state: directory
+    path: "{{ project_path }}"
+
+- name: Ensure clone of remote repo exists locally for giturl {{ git_url }}
+  ansible.builtin.git:
+    dest: "{{ project_path }}"
+    repo: "{{ git_url }}"
+    force: false
+    update: false
+    version: "{{ version | default(omit, true) }}"
+    recursive: false
