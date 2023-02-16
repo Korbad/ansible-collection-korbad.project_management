@@ -1,0 +1,24 @@
+---
+- name: Create structure for virtual environment
+  file:
+    state: directory
+    path: "{{ managed_virtual_environments_path }}"
+
+- name: Upgrade pip for current interpreter
+  pip:
+    name: pip
+    state: latest
+
+- name: Install virtualenv to the current interpreter via pip before creating venv
+  pip:
+    name: virtualenv
+    executable: pip3
+
+- name: Create venv
+  pip:
+    name:
+    - ansible
+    state: present
+    virtualenv: "{{ managed_virtual_environments_path }}"
+    virtualenv_site_packages: no
+    virtualenv_python: python3.8

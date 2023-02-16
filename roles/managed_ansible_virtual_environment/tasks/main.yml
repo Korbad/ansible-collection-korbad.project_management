@@ -1,24 +1,18 @@
 ---
-- name: Create structure for virtual environment
-  file:
-    state: directory
-    path: "{{ managed_virtual_environments_path }}"
+- name: Venv setup for Archlinux
+  include_role:
+    name: managed_ansible_virtual_environment/arch
+  when: ansible_distribution == 'Archlinux'
 
-- name: Upgrade pip for current interpreter
-  pip:
-    name: pip
-    state: latest
+- name: Venv setup for AlmaLinux
+  include_role:
+    name: managed_ansible_virtual_environment/alma
+  when: ansible_distribution == 'AlmaLinux'
 
-- name: Install virtualenv to the current interpreter via pip before creating venv
-  pip:
-    name: virtualenv
-    executable: pip3
+- name: Venv setup for Ubuntu
+  include_role:
+    name: managed_ansible_virtual_environment/ubuntu
+  when: ansible_distribution == 'Ubuntu'
 
-- name: Create venv
-  pip:
-    name:
-    - ansible
-    state: present
-    virtualenv: "{{ managed_virtual_environments_path }}"
-    virtualenv_site_packages: no
-    virtualenv_python: python3.8
+- name: Set up venv
+  include_tasks: manage_venv.yml
