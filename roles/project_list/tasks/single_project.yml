@@ -7,6 +7,7 @@
     project_name: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
     project_path: "{{ (managed_projects_path, project_name) | path_join }}"
     collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
+    collection_subdir: "{{ project.collection_subdir | default('',true) }}"
   when:
   - project.collection_name is defined
   - project.collection_namespace is defined

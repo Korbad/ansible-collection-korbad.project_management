@@ -14,7 +14,7 @@
   ansible.builtin.file:
     path: "{{ collection_path }}"
     state: link
-    src: "{{ project_path }}"
+    src: "{{ (project_path, collection_subdir | default(omit)) | path_join }}"
     force: true
   vars:
     collection_path: "{{ (collections_path, 'ansible_collections', collection_namespace, collection_name) | path_join }}"
