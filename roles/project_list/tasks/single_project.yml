@@ -8,6 +8,8 @@
     project_path: "{{ (managed_projects_path, project_name) | path_join }}"
     collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
     collection_subdir: "{{ project.collection_subdir | default('',true) }}"
+    depth: "{{ project.depth | default(false, true) }}"
+    single_branch: "{{ project.single_branch | default(false, true) }}"
   when:
   - project.collection_name is defined
   - project.collection_namespace is defined
