@@ -1,0 +1,17 @@
+---
+- name: Find ansible roles in project path
+  find:
+    paths: "{{ project_path }}/roles"
+    depth: 1
+    file_type: directory
+  register: found_roles_result
+
+- name: Manage each found role
+  include_role:
+    name: manage_ansible_role
+  vars:
+    managed_role_path: "{{ file_result.path }}"
+    managed_role_name: "{{ managed_role_path | basename }}"
+  loop: "{{ found_roles_result.files }}"
+  loop_control:
+    loop_var: file_result

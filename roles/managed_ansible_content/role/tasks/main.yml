@@ -1,0 +1,2 @@
+- name: Find and manage roles in collection
+  include_tasks: find_roles.yml
