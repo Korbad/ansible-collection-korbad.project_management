@@ -1,0 +1,9 @@
+- ansible.builtin.git:
+    dest: "{{ project_path }}"
+    repo: "{{ git_url }}"
+    force: false
+    update: false
+    version: "{{ version | default(omit, true) }}"
+    recursive: false
+    depth: "{{ depth | default(omit, true) }}"
+    single_branch: "{{ single_branch | default(omit, true) }}"

@@ -1,0 +1,43 @@
+- name: Manage project within {{ managed_projects_path }} (loop control)
+  file:
+    state: directory
+    path: "{{ project_path }}"
+    recurse: yes
+  loop: "{{ managed_projects2 }}"
+  loop_control:
+    label: "{{ item.project_name | default('dne',true) }}"
+  vars:
+    project_name: "{{ item.project_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+
+- name: Ensure clone of remote repo exists locally for
+  ansible.builtin.git:
+    dest: "{{ project_path }}"
+    repo: "{{ git_url }}"
+    force: false
+    update: false
+    version: "{{ version | default(omit, true) }}"
+    recursive: false
+    depth: "{{ depth | default(omit, true) }}"
+    single_branch: "{{ single_branch | default(omit, true) }}"
+  loop: "{{ managed_projects2 }}"
+  loop_control:
+    label: "{{ item.project_name | default('dne',true) }}"
+  when: item.project_name is defined
+  vars:
+    project_name: "{{ item.project_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+    git_url: "{{ item.git_url }}"
+  async: 600
+  poll: 0
+  register: git_clone_async_loop
+
+- name: wait for all git clones to finish
+  async_status:
+    jid: "{{ item.ansible_job_id }}"
+    mode: status
+  retries: 20
+  delay: 5
+  loop: "{{ git_clone_async_loop.results }}"
+  register: async_loop_jobs
+  until: async_loop_jobs.finished

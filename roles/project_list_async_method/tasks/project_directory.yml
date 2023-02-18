@@ -1,0 +1,6 @@
+---
+- name: Manage project directory for {{ project_name }}
+  file:
+    state: directory
+    path: "{{ (managed_projects_path, project_name) | path_join }}"
+    recurse: yes

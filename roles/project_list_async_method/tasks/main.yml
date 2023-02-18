@@ -1,0 +1,71 @@
+---
+- include_tasks: project_list.yml
+- include_tasks: collection_list.yml
+
+# - name: Manage project within {{ managed_projects_path }} (import)
+#   include_tasks: project_directory.yml
+#   loop: "{{ managed_projects }}"
+#   when: item.project_name is defined
+#   vars:
+#     project_name: "{{ item.project_name }}"
+#   loop_control:
+#     label: "{{ item.project_name | default('dne',true) }}"
+
+# - name: Manage project within {{ managed_projects_path }} (loop control)
+#   file:
+#     state: directory
+#     path: "{{ (managed_projects_path, project_name) | path_join }}"
+#     recurse: yes
+#   loop: "{{ managed_projects }}"
+#   loop_control:
+#     label: "{{ item.project_name | default('dne',true) }}"
+#   when: item.project_name is defined
+#   vars:
+#     project_name: "{{ item.project_name }}"
+
+# - name: Manage Ansible Collection within {{ managed_projects_path }} (import)
+#   include_tasks: project_directory.yml
+#   loop: "{{ managed_projects }}"
+#   vars:
+#     collection_name: "{{ item.collection_name }}"
+#     collection_namespace: "{{ item.collection_namespace }}"
+#     project_name: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
+#     project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+#   loop: "{{ managed_ansible_collections }}"
+#   loop_control:
+#     label: "{{ collection_name }}.{{ collection_namespace }}"
+
+# - name: Ansible Collection 2
+#   file:
+#     state: directory
+#     path: "{{ project_path }}"
+#     recurse: yes
+#   vars:
+#     collection_name: "{{ item.collection_name }}"
+#     collection_namespace: "{{ item.collection_namespace }}"
+#     project_name: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
+#     project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+#   loop: "{{ managed_ansible_collections }}"
+#   loop_control:
+#     label: "{{ collection_name }}.{{ collection_namespace }}"
+
+# - name: Ensure clone of remote repo exists locally for
+#   ansible.builtin.git:
+#     dest: "{{ project_path }}"
+#     repo: "{{ git_url }}"
+#     force: false
+#     update: false
+#     version: "{{ version | default(omit, true) }}"
+#     recursive: false
+#     depth: "{{ depth | default(omit, true) }}"
+#     single_branch: "{{ single_branch | default(omit, true) }}"
+#   vars:
+#     collection_name: "{{ item.collection_name }}"
+#     collection_namespace: "{{ item.collection_namespace }}"
+#     project_name: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
+#     project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+#     git_url: "{{ item.git_url }}"
+#   loop: "{{ managed_ansible_collections }}"
+#   loop_control:
+#     label: "{{ collection_name }}.{{ collection_namespace }}"
+
