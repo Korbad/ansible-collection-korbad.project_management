@@ -1,10 +1,52 @@
 ---
-- name: For each project in managed_projects list
-  include_tasks: single_project.yml
-  loop: "{{ managed_projects }}"
+- name: Ansible Collection
+  include_tasks: ansible_collection.yml
+  vars:
+    collection_name: "{{ project.collection_name }}"
+    collection_namespace: "{{ project.collection_namespace }}"
+    project_name: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+    collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
+    collection_subdir: "{{ project.collection_subdir | default('',true) }}"
+    depth: "{{ project.depth | default(false, true) }}"
+    single_branch: "{{ project.single_branch | default(false, true) }}"
+    git_url: "{{ project.git_url }}"
+  loop: "{{ managed_ansible_collections }}"
   loop_control:
     label: "{{ project.git_url }}"
     loop_var: project
+  when:
+  - managed_ansible_collections is defined and managed_ansible_collections is iterable
+  - project.collection_name is defined
+  - project.collection_namespace is defined
+
+- name: Ansible Role
+  include_tasks: ansible_role.yml
   vars:
+    fully_qualified_role_name: "{{ project.fully_qualified_role_name }}"
+    project_name: "ansible-role_{{ fully_qualified_role_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+    user_roles_path: "{{ (ansible_env.HOME, '.ansible', 'roles') | path_join }}"
     git_url: "{{ project.git_url }}"
-  when: managed_projects is defined
+  loop: "{{ managed_ansible_roles }}"
+  loop_control:
+    label: "{{ project.git_url }}"
+    loop_var: project
+  when:
+  - managed_ansible_roles is defined and managed_ansible_roles is iterable
+  - project.fully_qualified_role_name is defined
+
+- name: Generic Project
+  include_tasks: git_repo.yml
+  vars:
+    project_name: "{{ project.project_name }}"
+    project_path: "{{ (managed_projects_path, project_name) | path_join }}"
+    git_url: "{{ project.git_url }}"
+  loop: "{{ managed_git_repos }}"
+  loop_control:
+    label: "{{ project.git_url }}"
+    loop_var: project
+  when:
+  - managed_git_repos is defined and managed_git_repos is iterable
+  - project.project_name is defined
+
