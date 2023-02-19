@@ -1,0 +1,4 @@
+---
+managed_vagrant_files_directory_name: managed_vagrant_files
+vagrant_staging_dir: "{{ (ansible_env.HOME, managed_vagrant_files_directory_name) | path_join }}"
+vagrant_box_dir: "{{ (vagrant_staging_dir, inventory_hostname) | path_join }}"

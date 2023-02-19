@@ -1,0 +1,32 @@
+---
+- name: Ensure host is available via ssh using public keys from github.com/korbad.keys
+  hosts: all
+  gather_facts: true
+  become: true
+  handlers:
+  - name: restart_sshd
+    service:
+      name: sshd
+      state: restarted
+  tasks:
+  - name: Install open-ssh
+    dnf:
+      name: openssh-server
+  - name: Create ansible user
+    user:
+      name: ansible
+      state: present
+      shell: /bin/bash
+  - name: Pull authroized keys from github
+    authorized_key:
+      key: http://github.com/korbad.keys
+      user: ansible
+    notify: restart_sshd
+  # - community.general.sudoers:
+  #     name: ansible
+  #     commands: ALL
+  #     user: ansible
+  #     runas: root
+  - copy:
+      dest: /etc/sudoers.d/ansible
+      content: "ansible ALL=(root) NOPASSWD: ALL"

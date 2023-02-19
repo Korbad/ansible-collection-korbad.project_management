@@ -1,0 +1,13 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "{{ vagrant_vm_box }}"
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "{{ provisioner_playbook }}"
+  end
+  config.vm.hostname = "{{ inventory_hostname }}"
+  config.vm.network "private_network", ip: "{{ ansible_host }}"
+  config.vm.provider "virtualbox" do |vb|
+     vb.name = "{{ inventory_hostname }}"
+     vb.memory = "2048"
+  end
+end
