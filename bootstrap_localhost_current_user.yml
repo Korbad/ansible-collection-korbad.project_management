@@ -6,7 +6,7 @@
   vars:
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
-    managed_projects:
+    managed_ansible_collections:
     - git_url: https://github.com/Korbad/ansible-collection-korbad.project_management.git
       collection_namespace: korbad
       collection_name: project_management
