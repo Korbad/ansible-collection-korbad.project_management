@@ -1,0 +1,6 @@
+---
+- name: Manage binary storage directory at {{ managed_binaries_path }}
+  file:
+    state: directory
+    path: "{{ managed_binaries_path }}"
+    recurse: yes
