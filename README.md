@@ -14,7 +14,7 @@ Automation will:
 
 # To safely purge existing projects
 
-```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge safe_purge_managed_projects_localhost_current_user.yml```
+```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge safe_purge_managed_projects_localhost_current_user.yml --checkout=main```
 
 # To provision a minimal Ansible python virtual environment
 
