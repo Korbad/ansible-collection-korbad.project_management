@@ -1,0 +1,33 @@
+---
+- name: Ensure managed_files directory exists with proper permissions
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_files_path }}"
+    mode: u=rwx,g-rwx,o-rwx
+
+- name: Managed file stat {{ managed_file_path }}
+  stat:
+    path: "{{ managed_file_path }}"
+  register: managed_file
+
+- name: Overwrite file contents if they are defined
+  ansible.builtin.copy:
+    content: "{{ managed_file_contents }}"
+    dest: "{{ managed_file_path }}"
+    mode: u+rw,og-rwx
+  when: managed_file_contents is defined
+  
+- name: Create empty file if one doesn't exist
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ managed_file_path }}"
+    mode: u+rw,og-rwx
+  when:
+  - managed_file_contents is undefined
+  - not managed_file.stat.exists
+
+- name: Ensure file has the correct permissions
+  ansible.builtin.file:
+    path: "{{ managed_file_path }}"
+    state: file
+    mode: u=rw,g-rwx,o-rwx
