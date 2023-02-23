@@ -1,0 +1,4 @@
+---
+managed_project_path: "{{ (managed_projects_path, managed_project_name) | path_join }}"
+managed_project_venv_name: .venv
+managed_project_venv_path: "{{ (managed_project_path, managed_project_venv_name) | path_join }}"
