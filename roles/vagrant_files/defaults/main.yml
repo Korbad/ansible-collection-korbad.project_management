@@ -1,5 +1,5 @@
 ---
 managed_vagrant_files_directory_name: managed_vagrant_files
-vagrant_staging_dir: "{{ (lookup('env','HOME'), managed_vagrant_files_directory_name) | path_join }}"
+vagrant_staging_dir: "{{ (user_home_dir, managed_vagrant_files_directory_name) | path_join }}"
 vagrant_box_dir: "{{ (vagrant_staging_dir, inventory_hostname) | path_join }}"
 vagrant_provider: virtualbox
