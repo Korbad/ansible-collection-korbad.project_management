@@ -1,0 +1,4 @@
+---
+- name: Ensure ssh key pair exists
+  community.crypto.openssh_keypair:
+    path: "{{ managed_ssh_keypair_path }}"
