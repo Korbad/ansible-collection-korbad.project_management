@@ -1,0 +1,21 @@
+---
+- name: Find git repos in project path
+  find:
+    file_type: directory
+    paths: "{{ managed_projects_path }}"
+    recurse: true
+    hidden: true
+    patterns: .git
+  register: git_repos
+
+- name: For each repo found, perform git pull
+  command:
+    cmd: git pull
+    chdir: "{{ source_path }}"
+  loop: "{{ git_repos.files }}"
+  loop_control:
+    loop_var: git_repo
+    label: "{{ git_repo.path }}"
+  vars:
+    source_path: "{{ git_repo.path | dirname }}"
+  failed_when: false
