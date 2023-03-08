@@ -1,0 +1,2 @@
+managed_secret_path: "{{ (managed_secrets_path, managed_secret_name) | path_join }}"
+managed_secret_value: "{{ lookup('ansible.builtin.password', '/dev/null') }}"

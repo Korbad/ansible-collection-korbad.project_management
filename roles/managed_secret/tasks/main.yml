@@ -1,0 +1,9 @@
+---
+- name: Managed secret stat {{ managed_secret_path }}
+  stat:
+    path: "{{ managed_secret_path }}"
+  register: managed_secret
+
+- name: Create secret file if it doesn't exist
+  include_tasks: create_and_encrypt.yml
+  when: not managed_secret.stat.exists
