@@ -1,4 +1,0 @@
----
-- name: Decrypt (ansible-vault) managed file {{ managed_file_path }}
-  command:
-    cmd: ansible-vault decrypt {{ managed_file_path }}

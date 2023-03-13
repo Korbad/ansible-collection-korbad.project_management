@@ -1,4 +1,0 @@
----
-- name: Encrypt (ansible-vault) managed file {{ managed_file_path }}
-  command:
-    cmd: ansible-vault encrypt {{ managed_file_path }}
