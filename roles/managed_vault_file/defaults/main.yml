@@ -1,0 +1,3 @@
+
+vault_password_filename: vault_password_file
+vault_password_file_path: "{{ (managed_files_path, vault_password_filename) | path_join }}"
