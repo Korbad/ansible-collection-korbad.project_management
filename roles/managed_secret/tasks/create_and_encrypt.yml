@@ -3,6 +3,7 @@
     content: "{{ managed_secret_value }}"
     dest: "{{ managed_secret_path }}"
     mode: u+rw,og-rwx
+  no_log: true
 
 - name: Encrypt (ansible-vault) managed secret {{ managed_secret_path }}
   command:
