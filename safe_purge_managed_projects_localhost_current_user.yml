@@ -1,8 +1,11 @@
 ---
-- name: Manage localhost for current user on Ansible control node (localhost)
+- name: Safely purge managed_git_repos_path of git repos for current user on localhost
   hosts: localhost
-  roles:
-  - name: safe_purge_git_repos
   vars:
     ansible_user: "{{ lookup('env', 'USER') }}"
     ansible_connection: local
+  tasks:
+  - name: korbad.project_management.managed_git_repos
+    include_role:
+      name: korbad.project_management.managed_git_repos
+      tasks_from: safe_purge

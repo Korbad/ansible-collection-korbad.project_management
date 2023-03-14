@@ -1,7 +1,0 @@
----
-- name: Open VSCode at {{ source_path }}
-  command:
-    cmd: code -n .
-    chdir: "{{ source_path }}"
-  environment:
-      DISPLAY: ":0"

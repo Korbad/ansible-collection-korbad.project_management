@@ -1,7 +1,0 @@
----
-- name: Perform repo check in interactive loop
-  include_tasks: checks/repo.yml
-
-- name: Open VSCode and wait if any changes are found
-  include_tasks: interactive/open_vscode_wait.yml
-  when: unstaged_changes_detected or untracked_files_detected or git_stash_detected or unpublished_changes_sum | int > 0 or any_git_diff_complaints
