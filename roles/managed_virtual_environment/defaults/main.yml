@@ -1,0 +1,9 @@
+---
+# storage directory
+managed_virtual_environments_dirname: managed_virtual_environments
+managed_virtual_environments_path: "{{ (ansible_env.HOME, managed_virtual_environments_dirname) | path_join }}"
+# individual venv
+managed_virtual_environment_base: python3.8
+managed_virtual_environment_path: "{{ (managed_virtual_environments_path, managed_virtual_environment_name) | path_join }}"
+managed_virtual_environment_package_list:
+- ansible

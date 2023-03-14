@@ -1,0 +1,22 @@
+---
+- name: Ensure pip is installed and upgraded
+  include_role:
+    name: korbad.workstation.pip
+
+- name: Create structure for virtual environments
+  file:
+    state: directory
+    path: "{{ managed_virtual_environments_path }}"
+
+- name: Create structure for virtual environment
+  file:
+    state: directory
+    path: "{{ managed_virtual_environment_path }}"
+
+- name: Create venv
+  pip:
+    name: "{{ managed_virtual_environment_package_list }}"
+    state: present
+    virtualenv: "{{ managed_virtual_environment_path }}"
+    virtualenv_site_packages: no
+    virtualenv_python: "{{ managed_virtual_environment_base }}"

@@ -1,5 +1,0 @@
----
-# - name: Ensure python3 virtualenv is installed
-#   package:
-#     name: python3-virtualenv
-#   become: true
