@@ -1,0 +1,2 @@
+managed_projects_dirname: managed_projects
+managed_projects_path: "{{ (ansible_env.USER, managed_projects_dirname) | path_join }}"
