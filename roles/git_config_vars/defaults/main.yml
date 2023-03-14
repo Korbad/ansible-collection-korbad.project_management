@@ -1,0 +1,4 @@
+managed_secrets_dirname: managed_secrets
+managed_secrets_path: "{{ (ansible_env.HOME, managed_secrets_dirname) | path_join }}"
+git_username: "{{ lookup('file', managed_secrets_path+'/git_username') }}"
+git_email: "{{ lookup('file', managed_secrets_path+'/git_email') }}"
