@@ -1,0 +1,6 @@
+managed_secrets_dirname: managed_secrets
+managed_secrets_path: "{{ (ansible_env.HOME, managed_secrets_dirname) | path_join }}"
+semaphore_password: "{{ lookup('file', managed_secrets_path+'/semaphore_password') }}"
+semaphore_db_auth_password: "{{ lookup('file', managed_secrets_path+'/semaphore_db_auth_password') }}"
+semaphore_config_auth_password: "{{ lookup('file', managed_secrets_path+'/semaphore_config_auth_password') }}"
+semaphore_db_root_password: "{{ lookup('file', managed_secrets_path+'/semaphore_db_root_password') }}"
