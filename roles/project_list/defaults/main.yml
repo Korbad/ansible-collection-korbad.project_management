@@ -1,3 +1,0 @@
----
-managed_projects_project_name: managed_projects
-managed_projects_path: "{{ (ansible_env.HOME, managed_projects_project_name) | path_join }}"

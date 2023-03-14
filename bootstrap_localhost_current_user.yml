@@ -1,8 +1,8 @@
 ---
-- name: Manage localhost for current user on Ansible control node (localhost)
+- name: Bootstrap project_management on localhost for current user
   hosts: localhost
   roles:
-  - name: project_list
+  - name: managed_collections
   vars:
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
