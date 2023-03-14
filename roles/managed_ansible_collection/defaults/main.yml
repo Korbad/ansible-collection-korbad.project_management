@@ -1,5 +1,5 @@
 ---
-managed_ansible_collections_dirname: managed_ansible_collections
+managed_ansible_collections_dirname: managed_git_repos
 managed_ansible_collections_path: "{{ (ansible_env.HOME, managed_ansible_collections_dirname) | path_join }}"
 managed_ansible_collection_dirname: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
 managed_ansible_collection_path: "{{ (managed_ansible_collections_path, managed_ansible_collection_dirname) | path_join }}"
