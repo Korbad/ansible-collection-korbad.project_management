@@ -2,7 +2,7 @@
 - name: Bootstrap project_management on localhost for current user
   hosts: localhost
   roles:
-  - name: managed_collections
+  - name: managed_ansible_collections
   vars:
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
