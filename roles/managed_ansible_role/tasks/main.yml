@@ -1,5 +1,5 @@
 ---
-- name: Ensure git repo exists
+- name: Ensure git repo exists at {{ managed_ansible_role_path }}
   include_role:
     name: managed_git_repo
   vars:

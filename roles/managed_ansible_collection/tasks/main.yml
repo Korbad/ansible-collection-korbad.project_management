@@ -3,7 +3,6 @@
   ansible.builtin.file:
     state: directory
     path: "{{ managed_ansible_collections_path }}"
-    recurse: true
 
 - name: Ensure git repo exists at {{ managed_ansible_collection_path }}
   include_role:
