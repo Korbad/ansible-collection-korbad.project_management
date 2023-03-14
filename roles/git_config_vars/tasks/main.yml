@@ -5,6 +5,7 @@
   vars:
     managed_secret_name: "{{ item.name }}"
     managed_secret_value: "{{ item.value }}"
+    managed_secret_overwrite: true
   loop:
   - name: git_username
     value: "{{ git_username }}"
