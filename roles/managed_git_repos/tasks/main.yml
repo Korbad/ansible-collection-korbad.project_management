@@ -1,0 +1,15 @@
+---
+- name: git repo
+  include_role:
+    name: managed_git_repo
+  vars:
+    managed_git_repo_dirname: "{{ project.name | default(false, true) }}"
+    depth: "{{ project.depth | default(false, true) }}"
+    single_branch: "{{ project.single_branch | default(false, true) }}"
+    git_url: "{{ project.git_url }}"
+  loop: "{{ managed_git_repos }}"
+  loop_control:
+    label: "{{ project.git_url }}"
+    loop_var: project
+  when:
+  - managed_git_repos is defined and managed_git_repos is iterable

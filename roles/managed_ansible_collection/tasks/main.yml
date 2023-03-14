@@ -1,0 +1,26 @@
+---
+- name: Ensure directory exists at {{ managed_ansible_collections_path }}
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_ansible_collections_path }}"
+    recurse: true
+
+- name: Ensure git repo exists at {{ managed_ansible_collection_path }}
+  include_role:
+    name: managed_git_repo
+  vars:
+    managed_git_repo_path: "{{ managed_ansible_collection_path }}"
+
+- name: Purge symlinks from collection source
+  include_tasks: purge_symlinks.yml
+
+- name: Ensure collection namespace directory exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ (user_collections_path, 'ansible_collections', collection_namespace) | path_join }}"
+
+- name: Ensure symlink exists between collection project directory and ansible collections path
+  ansible.builtin.file:
+    path: "{{ user_collection_path }}"
+    state: link
+    src: "{{ (managed_ansible_collection_path, collection_subdir | default('')) | path_join }}"

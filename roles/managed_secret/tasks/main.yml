@@ -7,3 +7,4 @@
 - name: Create secret file if it doesn't exist
   include_tasks: create_and_encrypt.yml
   when: not managed_secret.stat.exists
+  

@@ -1,5 +1,0 @@
-- name: Ensure secrets directory exists with proper permissions
-  ansible.builtin.file:
-    state: directory
-    path: "{{ managed_secrets_path }}"
-    mode: u=rwx,g-rwx,o-rwx

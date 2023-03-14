@@ -1,0 +1,8 @@
+---
+managed_ansible_collections_dirname: managed_ansible_collections
+managed_ansible_collections_path: "{{ (ansible_env.HOME, managed_ansible_collections_dirname) | path_join }}"
+managed_ansible_collection_dirname: "ansible-collection_{{ collection_namespace }}.{{ collection_name }}"
+managed_ansible_collection_path: "{{ (managed_ansible_collections_path, managed_ansible_collection_dirname) | path_join }}"
+
+user_collections_path: "{{ (ansible_env.HOME, '.ansible', 'collections') | path_join }}"
+user_collection_path: "{{ (user_collections_path, 'ansible_collections', collection_namespace, collection_name) | path_join }}"

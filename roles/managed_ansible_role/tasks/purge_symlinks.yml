@@ -1,0 +1,17 @@
+---
+- name: Find symlinks in project path
+  find:
+    file_type: link
+    paths: "{{ managed_ansible_role_path }}"
+    recurse: true
+  register: symlinks
+
+- name: Remove symlinks from project to prevent infinite recursion
+  file:
+    state: absent
+    path: "{{ symlink.path }}"
+  loop: "{{ symlinks.files }}"
+  loop_control:
+    label: "{{ symlink.path }}"
+    loop_var: symlink
+  when: symlinks is defined
