@@ -1,4 +1,0 @@
-- name: Collection build
-  command:
-    cmd: ansible-galaxy collection build --force
-    chdir: "{{ project_path }}"

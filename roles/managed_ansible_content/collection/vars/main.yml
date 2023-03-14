@@ -1,8 +1,0 @@
----
-venv_bin_path: "{{ virtual_environment_path }}/bin"
-ansible_galaxy_cmd: "{{ venv_bin_path }}/ansible-galaxy"
-collection_build_args:
-  - "{{ ansible_galaxy_cmd }}"
-  - collection
-  - build
-  - --force
