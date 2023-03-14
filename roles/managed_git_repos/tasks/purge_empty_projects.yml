@@ -1,0 +1,3 @@
+---
+- name: Delete all empty folders in {{ managed_git_repos_path }}
+  shell: "find {{ managed_git_repos_path }} -type d -empty -delete"

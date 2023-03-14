@@ -1,0 +1,15 @@
+---
+- name: Get git fetch (with prune) {{ source_path }}
+  command:
+    cmd: git fetch --prune
+    chdir: "{{ source_path }}"
+  register: git_fetch
+
+- name: Check for untracked and/or unstaged changes
+  include_tasks: check_for_untracked_and_unstaged.yml
+
+- name: Check for unpublished changes on any local branch
+  include_tasks: check_each_branch_for_unpublished_changes.yml
+
+- name: Check for git stash
+  include_tasks: check_for_stash.yml

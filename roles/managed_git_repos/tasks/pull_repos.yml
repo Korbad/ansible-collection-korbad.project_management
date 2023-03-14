@@ -2,7 +2,7 @@
 - name: Find git repos in project path
   find:
     file_type: directory
-    paths: "{{ managed_projects_path }}"
+    paths: "{{ managed_git_repos_path }}"
     recurse: true
     hidden: true
     patterns: .git
