@@ -1,0 +1,2 @@
+managed_ansible_roles_dirname: managed_ansible_roles
+managed_ansible_roles_path: "{{ (ansible_env.HOME, managed_ansible_roles_dirname) | path_join }}"

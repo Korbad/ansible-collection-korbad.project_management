@@ -2,16 +2,16 @@
 - name: Ansible Collection
   include_role:
     name: managed_ansible_collection
+  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_collections) }}"
   vars:
-    collection_name: "{{ project.collection_name }}"
-    collection_namespace: "{{ project.collection_namespace }}"
-    collection_subdir: "{{ project.collection_subdir | default('',true) }}"
-    depth: "{{ project.depth | default(false, true) }}"
-    single_branch: "{{ project.single_branch | default(false, true) }}"
-    git_url: "{{ project.git_url }}"
-  loop: "{{ managed_ansible_collections }}"
+    collection_namespace: "{{ project.value.collection_namespace }}"
+    collection_name: "{{ project.value.collection_name }}"
+    git_url: "{{ project.value.git_url }}"
+    collection_subdir: "{{ project.value.collection_subdir | default('',true) }}"
+    depth: "{{ project.value.depth | default(false, true) }}"
+    single_branch: "{{ project.value.single_branch | default(false, true) }}"
   loop_control:
-    label: "{{ project.git_url }}"
+    label: "{{ project.value.git_url }}"
     loop_var: project
   when:
   - managed_ansible_collections is defined and managed_ansible_collections is iterable

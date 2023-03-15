@@ -1,13 +1,13 @@
 ---
-- name: Ansible Role
+- name: ansible role
   include_role:
     name: managed_ansible_role
+  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_roles) }}"
   vars:
-    fully_qualified_role_name: "{{ project.fully_qualified_role_name }}"
-    git_url: "{{ project.git_url }}"
-  loop: "{{ managed_ansible_roles }}"
+    fully_qualified_role_name: "{{ project.value.fully_qualified_role_name }}"
+    git_url: "{{ project.value.git_url }}"
   loop_control:
-    label: "{{ project.fully_qualified_role_name }}"
+    label: "{{ project.value.git_url }}"
     loop_var: project
   when:
   - managed_ansible_roles is defined and managed_ansible_roles is iterable
