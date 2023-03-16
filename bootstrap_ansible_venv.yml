@@ -1,8 +1,0 @@
----
-- name: Bootstraps a Python Virtual Environment suitable for Ansible automation
-  hosts: localhost
-  roles:
-  - name: managed_ansible_virtual_environment
-  vars:
-    ansible_connection: local
-    ansible_user: "{{ lookup('env', 'USER') }}"
