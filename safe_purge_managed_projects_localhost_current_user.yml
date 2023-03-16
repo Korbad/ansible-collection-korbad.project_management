@@ -7,5 +7,4 @@
   tasks:
   - name: Safely purge all managed git repos
     include_role:
-      name: managed_git_repos
-      tasks_from: safe_purge
+      name: safe_purge
