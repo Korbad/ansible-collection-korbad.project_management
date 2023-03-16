@@ -2,6 +2,6 @@
 - name: "Perform safe-purge of git repos at {{ managed_ansible_roles_path }}"
   include_role:
     name: korbad.project_management.managed_git_repos
-    with_tasks: safe_purge.yml
+    tasks_from: safe_purge
   vars:
     managed_git_repos_path: "{{ managed_ansible_roles_path }}"
