@@ -7,9 +7,11 @@
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
     managed_ansible_collections:
-    - git_url: https://github.com/Korbad/ansible-collection-korbad.project_management.git
-      collection_namespace: korbad
-      collection_name: project_management
-    - git_url: https://github.com/Korbad/ansible-collection-korbad.workstation.git
-      collection_namespace: korbad
-      collection_name: workstation
+      korbad_project_management:
+        git_url: https://github.com/Korbad/ansible-collection-korbad.project_management.git
+        collection_namespace: korbad
+        collection_name: project_management
+      korbad_workstation:
+        git_url: https://github.com/Korbad/ansible-collection-korbad.workstation.git
+        collection_namespace: korbad
+        collection_name: workstation
