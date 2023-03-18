@@ -7,3 +7,6 @@ managed_virtual_environment_base: python3.8
 managed_virtual_environment_path: "{{ (managed_virtual_environments_path, managed_virtual_environment_name) | path_join }}"
 managed_virtual_environment_package_list:
 - ansible
+- podman
+- ansible-builder
+- ansible-navigator
