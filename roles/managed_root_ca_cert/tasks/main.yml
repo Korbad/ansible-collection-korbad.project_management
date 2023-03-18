@@ -1,0 +1,29 @@
+---
+- name: Ensure Root CA directory exists
+  ansible.builtin.file:
+    path: "{{ managed_root_ca_cert_dir_path }}"
+    state: directory
+    mode: "0700"
+
+- name: Generate Root CA private key
+  ansible.builtin.openssl_privatekey:
+    path: "{{ root_ca_key_path }}"
+    size: 4096
+    mode: "0600"
+  register: root_ca_key_result
+
+- name: Generate Root CA CSR
+  ansible.builtin.openssl_csr:
+    path: "{{ root_ca_csr_path }}"
+    privatekey_path: "{{ root_ca_key_path }}"
+    common_name: "Managed Root CA"
+    mode: "0600"
+
+- name: Generate Root CA self-signed certificate
+  ansible.builtin.openssl_certificate:
+    path: "{{ root_ca_cert_path }}"
+    privatekey_path: "{{ root_ca_key_path }}"
+    csr_path: "{{ root_ca_csr_path }}"
+    provider: selfsigned
+    mode: "0600"
+    force: "{{ root_ca_key_result is changed }}"
