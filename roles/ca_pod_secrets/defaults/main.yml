@@ -1,0 +1,8 @@
+---
+intermediate_cert_name: ca_pod
+managed_root_ca_cert_dir_path: "{{ (ansible_env.HOME, 'managed_root_ca_cert') | path_join }}"
+managed_intermediate_ca_cert_dir_path: "{{ (managed_root_ca_cert_dir_path, intermediate_cert_name) | path_join }}"
+
+intermediate_ca_key_path: "{{ (managed_intermediate_ca_cert_dir_path, 'ca-key.pem') | path_join }}"
+intermediate_ca_csr_path: "{{ (managed_intermediate_ca_cert_dir_path, 'ca.csr') | path_join }}"
+intermediate_ca_cert_path: "{{ (managed_intermediate_ca_cert_dir_path, 'ca.pem') | path_join }}"

@@ -1,0 +1,5 @@
+- name: Ensure ca pod's intermediate ca certs exist
+  include_role:
+    name: managed_intermediate_ca_cert
+  vars:
+    intermediate_cert_name: ca_pod
