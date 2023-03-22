@@ -2,7 +2,7 @@
 - name: git repo
   include_role:
     name: managed_git_repo
-  loop: "{{ lookup('ansible.builtin.dict', managed_git_repos) }}"
+  loop: "{{ lookup('ansible.builtin.dict', managed_git_repos, wantlist=True) }}"
   vars:
     managed_git_repo_dirname: "{{ project.key }}"
     depth: "{{ project.value.depth | default(false, true) }}"

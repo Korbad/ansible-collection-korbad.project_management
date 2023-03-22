@@ -2,7 +2,7 @@
 - name: Ansible Collection
   include_role:
     name: managed_ansible_collection
-  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_collections) }}"
+  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_collections, wantlist=True) }}"
   vars:
     collection_namespace: "{{ project.value.collection_namespace }}"
     collection_name: "{{ project.value.collection_name }}"

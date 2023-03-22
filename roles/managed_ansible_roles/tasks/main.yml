@@ -2,7 +2,7 @@
 - name: ansible role
   include_role:
     name: managed_ansible_role
-  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_roles) }}"
+  loop: "{{ lookup('ansible.builtin.dict', managed_ansible_roles, wantlist=True) }}"
   vars:
     fully_qualified_role_name: "{{ project.value.fully_qualified_role_name }}"
     git_url: "{{ project.value.git_url }}"
