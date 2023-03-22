@@ -1,0 +1,13 @@
+---
+- name: Create directory for virtual environment
+  file:
+    state: directory
+    path: "{{ venv_path }}"
+
+- name: Create venv from {{ requirements_file_path }}
+  pip:
+    requirements: "{{ requirements_file_path }}"
+    state: present
+    virtualenv: "{{ venv_path }}"
+    virtualenv_site_packages: no
+    virtualenv_python: python3.8

@@ -1,5 +1,0 @@
----
-dependencies:
-- name: managed_projects
-- name: korbad.workstation.virtualenv
-- name: korbad.workstation.python

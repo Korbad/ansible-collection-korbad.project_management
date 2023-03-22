@@ -1,0 +1,5 @@
+---
+requirements_directory_path: "{{ requirements_file_path | dirname }}"
+requirements_file_path: "{{ (requirements_directory_path, 'requirements.txt') | path_join }}"
+venv_dir_name: .venv
+venv_path: "{{ (requirements_directory_path, venv_dir_name) | path_join }}"
