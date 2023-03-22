@@ -1,0 +1,20 @@
+---
+- name: "Find requirements.txt in {{ requirements_search_path }}"
+  find:
+    file_type: file
+    paths: "{{ requirements_search_path }}"
+    recurse: true
+    patterns: requirements.txt
+    depth: 2
+  register: requirements_files
+
+- name: For each requirements.txt found, perform create venv
+  include_role:
+    name: venv_from_requirements_file
+  loop: "{{ requirements_files.files }}"
+  loop_control:
+    loop_var: requirements_file
+    label: "{{ requirements_file.path }}"
+  vars:
+    requirements_file_path: "{{ requirements_file.path }}"
+
