@@ -16,5 +16,5 @@ Automation will:
 
 To safely purge existing managed (version controlled) content:
 
-```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge safe_purge_managed_projects_localhost_current_user.yml --checkout=main```
+```ansible-pull -U https://github.com/Korbad/ansible-collection-korbad.project_management.git -i localhost, --accept-host-key --clean --purge isolated-safe_purge.yml --checkout=main```
 
