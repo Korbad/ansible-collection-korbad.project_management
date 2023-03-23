@@ -1,4 +1,4 @@
 
-managed_files_path: "{{ (ansible_env.HOME, 'managed_files') | path_join }}"
+managed_vault_files_path: "{{ (ansible_env.HOME, 'managed_vault_files') | path_join }}"
 vault_password_filename: vault_password_file
-vault_password_file_path: "{{ (managed_files_path, vault_password_filename) | path_join }}"
+vault_password_file_path: "{{ (managed_vault_files_path, vault_password_filename) | path_join }}"

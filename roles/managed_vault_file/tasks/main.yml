@@ -1,4 +1,10 @@
 ---
+- name: Ensure managed_vault_files directory exists with proper permissions
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_vault_files_path }}"
+    mode: u=rwx,g-rwx,o-rwx
+
 - name: Managed file stat {{ vault_password_file_path }}
   stat:
     path: "{{ vault_password_file_path }}"
