@@ -1,0 +1,6 @@
+---
+load_vars_custom_name:
+varname_to_load: 
+git_repo_url: 
+git_file_path: "{{ varname_to_load }}.yml"
+git_ref: main # Change this to specify branch, tag, commit, or PR number

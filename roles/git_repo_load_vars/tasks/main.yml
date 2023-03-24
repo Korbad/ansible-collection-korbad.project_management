@@ -1,0 +1,22 @@
+---
+- name: Create temporary directory
+  ansible.builtin.tempfile:
+    state: directory
+  register: temp_dir
+
+- name: Clone the Git repository
+  ansible.builtin.git:
+    repo: "{{ git_repo_url }}"
+    dest: "{{ temp_dir.path }}"
+    version: "{{ git_ref | default(omit,true) }}"
+    accept_hostkey: yes
+
+- name: Include the YAML file from the cloned repository as a custom dictionary variable
+  ansible.builtin.include_vars:
+    file: "{{ temp_dir.path }}/{{ git_file_path }}"
+    name: "{{ load_vars_custom_name | default(omit, true) }}"
+
+- name: Remove temporary directory
+  ansible.builtin.file:
+    path: "{{ temp_dir.path }}"
+    state: absent
