@@ -1,0 +1,7 @@
+---
+managed_k8s_cert_name: k8s
+managed_k8s_ssl_dir: "{{ (ansible_env.HOME, 'managed_k8s_ssl') | path_join }}"
+managed_k8s_ca_key_size: 4096
+managed_k8s_client_key_size: 4096
+managed_k8s_ca_common_name: "my-{{ managed_k8s_cert_name }}-ca"
+
