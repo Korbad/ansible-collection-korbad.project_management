@@ -1,0 +1,40 @@
+---
+- name: Create temporary directory for old version
+  ansible.builtin.tempfile:
+    state: directory
+  register: temp_dir_old_ver
+
+- name: Clone the old Git repository
+  ansible.builtin.git:
+    repo: "{{ git_repo_url }}"
+    dest: "{{ temp_dir_old_ver.path }}"
+    version: "{{ git_ref_old_vars | default(omit,true) }}"
+    accept_hostkey: yes
+  notify: 
+  - Remove temporary directory for old version
+
+- name: Create temporary directory for new version
+  ansible.builtin.tempfile:
+    state: directory
+  register: temp_dir_new_ver
+
+- name: Clone the new Git repository
+  ansible.builtin.git:
+    repo: "{{ git_repo_url }}"
+    dest: "{{ temp_dir_new_ver.path }}"
+    version: "{{ git_ref_new_vars | default(omit,true) }}"
+    accept_hostkey: yes
+  notify: 
+  - Remove temporary directory for new version
+
+
+
+- name: Include the YAML file from the cloned repository as a custom dictionary variable
+  ansible.builtin.include_vars:
+    file: "{{ temp_dir_old_ver.path }}/{{ git_file_path }}"
+    name: "{{ loaded_old_vars_name | default(omit, true) }}"
+
+- name: Include the YAML file from the cloned repository as a custom dictionary variable
+  ansible.builtin.include_vars:
+    file: "{{ temp_dir_new_ver.path }}/{{ git_file_path }}"
+    name: "{{ load_vars_custom_name | default(omit, true) }}"
