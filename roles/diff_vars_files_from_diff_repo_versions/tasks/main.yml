@@ -1,0 +1,24 @@
+---
+- name: Download .yml file from version 1
+  ansible.builtin.uri:
+    url: "{{ file_uri_version_1 }}"
+    headers:
+      Authorization: "token {{ github_personal_access_token }}"
+    return_content: yes
+  register: file_content_1
+
+- name: Download .yml file from version 2
+  ansible.builtin.uri:
+    url: "{{ file_uri_version_2 }}"
+    headers:
+      Authorization: "token {{ github_personal_access_token }}"
+    return_content: yes
+  register: file_content_2
+
+- name: Load .yml content from version 1
+  set_fact:
+    vars_version_1: "{{ file_content_1.content | from_yaml }}"
+
+- name: Load .yml content from version 2
+  set_fact:
+    vars_version_2: "{{ file_content_2.content | from_yaml }}"

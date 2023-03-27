@@ -1,0 +1,16 @@
+- name: Identify removed items
+  set_fact:
+    removed_items: "{{ removed_items | default({}) | combine({item.key: item.value}) }}"
+  loop: "{{ vars_version_1[dictionary_key] | dict2items }}"
+  when: "item.key not in vars_version_2[dictionary_key]"
+
+- name: Identify changed or added items
+  set_fact:
+    changed_or_added_items: "{{ changed_or_added_items | default({}) | combine({item.key: item.value}) }}"
+  loop: "{{ vars_version_2[dictionary_key] | dict2items }}"
+  when: "item.key not in vars_version_1[dictionary_key] or vars_version_1[dictionary_key][item.key] | default(None) != item.value"
+
+- name: Wrap results with dictionary_key
+  set_fact:
+    wrapped_removed_items: "{{ {dictionary_key: removed_items} }}"
+    wrapped_changed_or_added_items: "{{ {dictionary_key: changed_or_added_items} }}"
