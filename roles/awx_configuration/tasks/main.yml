@@ -1,0 +1,3 @@
+---
+- name: Process organizations
+  include_tasks: process_organizations.yml

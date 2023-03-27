@@ -1,0 +1,7 @@
+- name: Ensure projects are present in AWX
+  include_tasks: process_project.yml
+  loop: "{{ org_item.value.projects | dict2items }}"
+  loop_control:
+    loop_var: project_item
+    label: "{{ org_item.key }}/{{ project_item.key }}"
+  register: awx_projects

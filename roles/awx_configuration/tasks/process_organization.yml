@@ -1,0 +1,8 @@
+- name: Organization config
+  awx.awx.organization:
+    name: "{{ org_item.key }}"
+    description: "{{ org_item.value.description }}"
+    state: present
+
+- name: Process projects
+  include_tasks: process_projects.yml

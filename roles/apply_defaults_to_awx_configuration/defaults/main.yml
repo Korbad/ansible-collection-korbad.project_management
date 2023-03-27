@@ -1,0 +1,9 @@
+awx_configuration:
+  organizations:
+    _default:
+      projects:
+        _default:
+          source_control_type: git
+          source_control_credential: bitbucket_ro
+          job_templates: {}
+      inventories: {}

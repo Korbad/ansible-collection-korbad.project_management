@@ -1,0 +1,13 @@
+# korbad.project_management/hierarchical_data_structure/tasks/main.yml
+---
+- name: Initialize empty dictionary for aggregated variables
+  set_fact:
+    aggregated_variables: {}
+
+- name: Iterate over top-level groups
+  include_tasks: process_groups.yml
+  loop: "{{ hierarchical_data_structure.all.children | default({}, true) | dict2items }}"
+  loop_control:
+    loop_var: group
+  vars:
+    parent_vars: "{{ hierarchical_data_structure.all.vars }}"

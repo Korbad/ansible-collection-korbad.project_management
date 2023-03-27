@@ -1,0 +1,38 @@
+# korbad.project_management/hierarchical_data_structure/tasks/process_groups.yml
+---
+- name: Merge group's variables with parent variables
+  set_fact:
+    current_group_vars: "{{ parent_vars | combine(group.value.vars, recursive=True) }}"
+
+- name: Set default empty dictionary for group's items
+  set_fact:
+    group_items: "{{ group.value | combine({'items': {}}, recursive=True) | json_query('items') }}"
+
+- name: Debug group_items variable
+  debug:
+    var: group_items
+
+- name: Convert group's items dictionary to a list of key-value pairs
+  set_fact:
+    group_items_list: "{{ group_items | dict2items }}"
+
+- name: Process group's items if present
+  set_fact:
+    aggregated_variables: "{{ aggregated_variables | combine({item.key: current_group_vars | combine(item.value, recursive=True)}, recursive=True) }}"
+  loop: "{{ group_items_list }}"
+  loop_control:
+    loop_var: item
+
+- name: Iterate over children groups if present
+  include_tasks: process_groups.yml
+  loop: "{{ group.value.children | default({}) | dict2items }}"
+  loop_control:
+    loop_var: group
+  vars:
+    parent_vars: "{{ current_group_vars }}"
+  when: group.value.children is defined
+
+- name: Combine aggregated_variables with an empty dictionary when no items or children are present
+  set_fact:
+    aggregated_variables: "{{ aggregated_variables | combine({}) }}"
+  when: group.value.items is not defined and group.value.children is not defined
