@@ -1,3 +1,8 @@
 ---
-- name: Process organizations
-  include_tasks: process_organizations.yml
+- name: Process each organization
+  include_tasks: process_organization.yml
+  loop: "{{ awx_configuration.organizations | dict2items }}"
+  loop_control:
+    loop_var: org_item
+    label: "{{ org_item.key }}"
+  register: awx_organizations

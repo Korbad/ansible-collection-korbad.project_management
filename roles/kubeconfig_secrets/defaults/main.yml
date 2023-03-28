@@ -1,0 +1,4 @@
+managed_secrets_dirname: managed_secrets
+managed_secrets_path: "{{ (ansible_env.HOME, managed_secrets_dirname) | path_join }}"
+kubeconfig_username: "{{ lookup('file', managed_secrets_path+'/kubeconfig_username') }}"
+kubeconfig_password: "{{ lookup('file', managed_secrets_path+'/kubeconfig_password') }}"
