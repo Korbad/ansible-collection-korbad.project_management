@@ -1,7 +1,0 @@
----
-- name: Install required packages to create venvs
-  package:
-    name:
-    - python3-distutils
-    - python3-testresources
-  become: true
