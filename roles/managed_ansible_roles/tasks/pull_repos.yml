@@ -1,0 +1,7 @@
+---
+- name: Pull git repos found in managed_ansible_roles_path
+  include_role:
+    name: managed_git_repos
+    tasks_from: pull_repos
+  vars:
+    managed_git_repos_path: "{{ managed_ansible_roles_path }}"
