@@ -1,0 +1,3 @@
+managed_project_manager_dirname: project_manager
+managed_project_manager_path: "{{ (ansible_env.HOME, managed_project_manager_dirname) | path_join }}"
+project_manager_git_url: git@github.com:Korbad/ansible-collection-korbad.project_management.git
