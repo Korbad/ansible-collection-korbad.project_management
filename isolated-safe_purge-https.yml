@@ -1,0 +1,19 @@
+- name: Ansible-pull target for safe-purge
+  hosts: localhost
+  vars:
+    project_management_dir: "{{ (playbook_dir, 'korbad.project_management') | path_join }}"
+  tasks:
+  - name: Create tmp dir for korbad.project_management collection
+    file:
+      state: directory
+      path: "{{ project_management_dir }}"
+
+  - name: Clone git repo
+    git:
+      repo: https://github.com:Korbad/ansible-collection-korbad.project_management.git
+      dest: "{{ project_management_dir }}"
+
+  - name: Use the korbad.project_management collection to perform safe-purge
+    command:
+      cmd: ansible-playbook safe_purge.yml
+      chdir: "{{ project_management_dir }}"
