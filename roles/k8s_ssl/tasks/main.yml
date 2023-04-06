@@ -7,46 +7,40 @@
 
 - name: Generate CA key
   community.crypto.openssl_privatekey:
-    path: "{{ managed_k8s_ssl_dir }}/ca.key"
+    path: "{{ managed_k8s_ca_key }}"
     size: "{{ managed_k8s_ca_key_size }}"
 
 - name: Generate CA CSR
   community.crypto.openssl_csr:
-    path: "{{ managed_k8s_ssl_dir }}/ca.csr"
-    privatekey_path: "{{ managed_k8s_ssl_dir }}/ca.key"
+    path: "{{ managed_k8s_ca_csr }}"
+    privatekey_path: "{{ managed_k8s_ca_key }}"
     subject:
       commonName: "{{ managed_k8s_ca_common_name }}"
 
 - name: Generate CA certificate
   community.crypto.x509_certificate:
-    path: "{{ managed_k8s_ssl_dir }}/ca.crt"
-    privatekey_path: "{{ managed_k8s_ssl_dir }}/ca.key"
-    csr_path: "{{ managed_k8s_ssl_dir }}/ca.csr"
+    path: "{{ managed_k8s_ca_crt }}"
+    privatekey_path: "{{ managed_k8s_ca_key }}"
+    csr_path: "{{ managed_k8s_ca_csr }}"
     provider: selfsigned
 
 - name: Generate client key
   community.crypto.openssl_privatekey:
-    path: "{{ managed_k8s_ssl_dir }}/client.key"
+    path: "{{ managed_k8s_client_key }}"
     size: "{{ managed_k8s_client_key_size }}"
 
 - name: Generate client CSR
   community.crypto.openssl_csr:
-    path: "{{ managed_k8s_ssl_dir }}/client.csr"
-    privatekey_path: "{{ managed_k8s_ssl_dir }}/client.key"
+    path: "{{ managed_k8s_client_csr }}"
+    privatekey_path: "{{ managed_k8s_client_key }}"
     subject:
       commonName: "{{ managed_k8s_ca_common_name }}"
 
 - name: Generate client certificate
   community.crypto.x509_certificate:
-    path: "{{ managed_k8s_ssl_dir }}/client.crt"
-    privatekey_path: "{{ managed_k8s_ssl_dir }}/client.key"
-    csr_path: "{{ managed_k8s_ssl_dir }}/client.csr"
+    path: "{{ managed_k8s_client_crt }}"
+    privatekey_path: "{{ managed_k8s_client_key }}"
+    csr_path: "{{ managed_k8s_client_csr }}"
     provider: ownca
-    ownca_path: "{{ managed_k8s_ssl_dir }}/ca.crt"
-    ownca_privatekey_path: "{{ managed_k8s_ssl_dir }}/ca.key"
-
-- name: Set k8s_ssl_ca_cert, k8s_client_cert, and k8s_client_key facts
-  set_fact:
-    k8s_ssl_ca_cert: "{{ managed_k8s_ssl_dir }}/ca.crt"
-    k8s_client_cert: "{{ managed_k8s_ssl_dir }}/client.crt"
-    k8s_client_key: "{{ managed_k8s_ssl_dir }}/client.key"
+    ownca_path: "{{ managed_k8s_ca_crt }}"
+    ownca_privatekey_path: "{{ managed_k8s_ca_key }}"

@@ -5,3 +5,16 @@ managed_k8s_ca_key_size: 4096
 managed_k8s_client_key_size: 4096
 managed_k8s_ca_common_name: "my-{{ managed_k8s_cert_name }}-ca"
 
+ca_key_filename: ca.key
+ca_crt_filename: ca.crt
+ca_csr_filename: ca.csr
+managed_k8s_ca_key: "{{ (managed_k8s_ssl_dir, ca_key_filename) | path_join }}"
+managed_k8s_ca_csr: "{{ (managed_k8s_ssl_dir, ca_csr_filename) | path_join }}"
+managed_k8s_ca_crt: "{{ (managed_k8s_ssl_dir, ca_crt_filename) | path_join }}"
+
+client_key_filename: client.key
+client_crt_filename: client.crt
+client_csr_filename: client.csr
+managed_k8s_client_key: "{{ (managed_k8s_ssl_dir, client_key_filename) | path_join }}"
+managed_k8s_client_crt: "{{ (managed_k8s_ssl_dir, client_crt_filename) | path_join }}"
+managed_k8s_client_csr: "{{ (managed_k8s_ssl_dir, client_csr_filename) | path_join }}"
