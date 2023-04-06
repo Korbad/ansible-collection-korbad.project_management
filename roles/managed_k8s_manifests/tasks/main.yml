@@ -1,0 +1,6 @@
+---
+- name: Ensure managed_k8s_manifests_path directory exists with proper permissions
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_k8s_manifests_path }}"
+    mode: u=rwx,g-rwx,o-rwx

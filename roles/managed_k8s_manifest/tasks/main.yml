@@ -1,0 +1,11 @@
+- name: Managed file stat {{ managed_k8s_manifest_path }}
+  stat:
+    path: "{{ managed_k8s_manifest_path }}"
+  register: managed_k8s_manifest
+
+- name: Download metrics-server components
+  ansible.builtin.get_url:
+    url: "{{ k8s_manifest_url }}"
+    dest: "{{ managed_k8s_manifest_path }}"
+    force: no
+  register: download_result

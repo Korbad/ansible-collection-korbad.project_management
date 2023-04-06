@@ -1,0 +1,2 @@
+managed_k8s_manifests_dirname: managed_k8s_manifests
+managed_k8s_manifests_path: "{{ (ansible_env.HOME, managed_k8s_manifests_dirname) | path_join }}"

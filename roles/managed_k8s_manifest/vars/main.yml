@@ -1,0 +1,1 @@
+managed_k8s_manifest_path: "{{ (managed_k8s_manifests_path, managed_k8s_manifest_filename) | path_join }}"
