@@ -1,17 +1,8 @@
 ---
 - name: Bootstrap project_management on localhost for current user
   hosts: localhost
-  roles:
-  - name: managed_ansible_collections
   vars:
     ansible_connection: local
     ansible_user: "{{ lookup('env', 'USER') }}"
-    managed_ansible_collections:
-      korbad_project_management:
-        git_url: https://github.com/Korbad/ansible-collection-korbad.project_management.git
-        collection_namespace: korbad
-        collection_name: project_management
-      korbad_workstation:
-        git_url: https://github.com/Korbad/ansible-collection-korbad.workstation.git
-        collection_namespace: korbad
-        collection_name: workstation
+  roles:
+  - name: managed_project_manager
