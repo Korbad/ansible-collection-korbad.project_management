@@ -1,3 +1,9 @@
 ---
-- name: Delete all empty folders in {{ managed_git_repos_path }}
+- name: Check if {{ managed_git_repos_path }} exists
+  ansible.builtin.stat:
+    path: "{{ managed_git_repos_path }}"
+  register: managed_git_repos_path_stat
+
+- name: Delete all empty folders in {{ managed_git_repos_path }} if it exists
   shell: "find {{ managed_git_repos_path }} -type d -empty -delete"
+  when: managed_git_repos_path_stat.stat.exists and managed_git_repos_path_stat.stat.isdir
