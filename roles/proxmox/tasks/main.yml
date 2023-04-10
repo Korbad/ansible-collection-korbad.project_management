@@ -1,0 +1,20 @@
+- name: Download Proxmox VE ISO
+  get_url:
+    url: "https://www.proxmox.com/downloads/proxmox-ve/iso-images/proxmox-ve_{{ proxmox_version }}_iso"
+    dest: "/tmp/proxmox-ve_{{ proxmox_version }}_iso"
+  
+- name: Check SSD path
+  command: lsblk -J
+  register: lsblk_result
+
+- name: Set SSD path
+  set_fact:
+    ssd_device: "{{ item.key }}"
+  when: "'{{ ssd_identifier }}' in item.value.holder_of | map('to_string') | list | join(' ')"
+  loop: "{{ lsblk_result.stdout | from_json | json_query('blockdevices') }}"
+  
+- name: Write ISO to SSD
+  ansible.builtin.shell: "dd if=/tmp/proxmox-ve_{{ proxmox_version }}_iso of=/dev/{{ ssd_device }} bs=4M conv=fsync status=progress"
+
+- name: Create UEFI boot entry
+  command: "efibootmgr -c -d /dev/{{ ssd_device }} -p 1 -L 'Proxmox VE' -l '\\EFI\\proxmox\\grubx64.efi'"
