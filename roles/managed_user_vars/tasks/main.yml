@@ -1,0 +1,37 @@
+---
+- name: Ensure the src directory exists for git repo {{ managed_user_vars_path }}
+  file:
+    state: directory
+    path: "{{ managed_user_vars_path }}"
+
+- name: Managed file stat {{ managed_user_vars_file_path }}
+  stat:
+    path: "{{ managed_user_vars_file_path }}"
+  register: managed_file
+
+- name: Create empty file if one doesn't exist
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ managed_user_vars_file_path }}"
+    mode: u+rw,og-rwx
+  when:
+  - managed_file_contents is undefined
+  - not managed_file.stat.exists
+
+- name: Ensure file has the correct permissions
+  ansible.builtin.file:
+    path: "{{ managed_user_vars_file_path }}"
+    state: file
+    mode: u=rw,g-rwx,o-rwx
+
+- name: Slurp remote YAML file
+  slurp:
+    src: "{{ managed_user_vars_file_path }}"
+  register: remote_yaml_content
+
+- name: Set facts from remote YAML file
+  set_fact:
+    remote_vars: "{{ remote_yaml_content.content | b64decode | from_yaml }}"
+
+- debug:
+    var: remote_vars
