@@ -1,0 +1,11 @@
+---
+- name: Set up minimal ansible development workstation
+  hosts: localhost
+  vars:
+    ansible_user: "{{ lookup('env', 'USER') }}"
+    ansible_connection: local
+  tasks:
+  - name: Ensure directory exists for managed user vars
+    include_role:
+      name: managed_user_vars
+  
