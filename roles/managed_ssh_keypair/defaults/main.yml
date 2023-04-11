@@ -1,3 +1,0 @@
----
-ssh_keyname: id_rsa
-managed_ssh_keypair_path: "{{ (ansible_env.HOME, '.ssh', ssh_keyname) | path_join }}"

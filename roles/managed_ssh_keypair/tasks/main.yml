@@ -1,4 +1,12 @@
 ---
-- name: Ensure ssh key pair exists
-  community.crypto.openssh_keypair:
-    path: "{{ managed_ssh_keypair_path }}"
+- name: Generate an SSH key for the current user
+  ansible.builtin.user:
+    generate_ssh_key: yes
+    name: "{{ ansible_env.USER }}"
+  register: keygen
+  notify:
+  - restart sshd
+
+- name: Display generated PUBLIC key
+  debug:
+    var: keygen.ssh_public_key
