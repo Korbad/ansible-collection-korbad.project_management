@@ -1,8 +1,17 @@
 ---
+
 - name: Ensure the src directory exists for git repo {{ managed_user_vars_path }}
   file:
     state: directory
     path: "{{ managed_user_vars_path }}"
+
+- name: Ensure clone of remote repo exists locally for giturl {{ ansible_user_vars_repo }}
+  ansible.builtin.git:
+    dest: "{{ managed_user_vars_path }}"
+    repo: "{{ ansible_user_vars_repo }}"
+    force: true
+    update: true
+    accept_hostkey: yes
 
 - name: Managed file stat {{ managed_user_vars_file_path }}
   stat:
