@@ -1,9 +1,4 @@
 ---
-- name: Ensure the src directory exists for git repo {{ managed_git_repo_path }}
-  file:
-    state: directory
-    path: "{{ managed_git_repo_path }}"
-
 - name: Ensure clone of remote repo exists locally for giturl {{ git_url }}
   ansible.builtin.git:
     dest: "{{ managed_git_repo_path }}"
@@ -14,3 +9,10 @@
     recursive: false
     depth: "{{ depth | default(omit, true) }}"
     single_branch: "{{ single_branch | default(omit, true) }}"
+  ignore_errors: true
+  register: git_module_result
+
+- name: Check if the error is not related to an empty repository
+  ansible.builtin.fail:
+    msg: "The git module task failed for a reason other than an empty repository: {{ git_module_result }}"
+  when: git_module_result is failed and "pathspec" not in git_module_result.stderr
