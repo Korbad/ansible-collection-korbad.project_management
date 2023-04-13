@@ -4,6 +4,7 @@
     cmd: git stash list
     chdir: "{{ source_path }}"
   register: git_stash
+  changed_when: false
 
 - name: Set fact for git_stash
   set_fact:
