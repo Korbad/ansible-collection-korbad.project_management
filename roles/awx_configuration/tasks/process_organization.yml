@@ -2,6 +2,9 @@
   awx.awx.organization:
     name: "{{ org_item.key }}"
     description: "{{ org_item.value.description }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    controller_host: "{{ controller_host }}"
     state: present
 
 - name: Ensure projects are present in AWX
