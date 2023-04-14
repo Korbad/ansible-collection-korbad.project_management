@@ -12,6 +12,7 @@
     force: true
     update: true
     accept_hostkey: yes
+  when: ansible_user_vars_repo is defined
 
 - name: Include all YAML files from the remote vars_files directory
   ansible.builtin.include_vars:
