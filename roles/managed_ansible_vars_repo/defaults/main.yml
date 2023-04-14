@@ -1,0 +1,2 @@
+managed_user_vars_dirname: managed_user_vars
+managed_user_vars_path: "{{ (ansible_env.HOME, managed_user_vars_dirname) | path_join }}"

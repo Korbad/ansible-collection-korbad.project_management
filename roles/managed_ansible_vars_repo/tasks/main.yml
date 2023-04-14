@@ -1,0 +1,21 @@
+---
+
+- name: Ensure the src directory exists for git repo {{ managed_user_vars_path }}
+  file:
+    state: directory
+    path: "{{ managed_user_vars_path }}"
+
+- name: Ensure clone of remote repo exists locally for giturl {{ ansible_user_vars_repo }}
+  ansible.builtin.git:
+    dest: "{{ managed_user_vars_path }}"
+    repo: "{{ ansible_user_vars_repo }}"
+    force: true
+    update: true
+    accept_hostkey: yes
+
+- name: Include all YAML files from the remote vars_files directory
+  ansible.builtin.include_vars:
+    dir: "{{ managed_user_vars_path }}"
+    ignore_unknown_extensions: true
+    extensions:
+      - yml
