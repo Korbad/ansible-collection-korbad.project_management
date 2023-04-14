@@ -10,4 +10,4 @@
     state: present
     virtualenv: "{{ venv_path }}"
     virtualenv_site_packages: no
-    virtualenv_python: python3.8
+    virtualenv_python: "{{ python_interpreter }}"
