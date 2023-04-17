@@ -8,8 +8,8 @@
 
 - name: Update branch dict
   set_fact:
-    branches_dict: "{{ branches_dict | default({}) | combine({key: val}) }}"
-    branches_git_diff_complaints: "{{ branches_git_diff_complaints | default({}) | combine({key: git_diff_complained})}}"
+    branches_dict: "{{ branches_dict | default({}, True) | combine({key: val}) }}"
+    branches_git_diff_complaints: "{{ branches_git_diff_complaints | default({}, True) | combine({key: git_diff_complained})}}"
   vars:
     key: "{{ branch }}"
     val: "{{ git_diff.stdout_lines | length }}"
