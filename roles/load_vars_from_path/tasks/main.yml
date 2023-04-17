@@ -1,0 +1,6 @@
+- name: Include all YAML files from the remote vars_files directory "{{ load_vars_path }}"
+  ansible.builtin.include_vars:
+    dir: "{{ load_vars_path }}"
+    ignore_unknown_extensions: true
+    extensions:
+      - yml
