@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure the src directory exists for git repo {{ managed_ansible_vars_repo_path }}
   file:
     state: directory
@@ -14,7 +13,7 @@
     accept_hostkey: yes
   when: ansible_vars_repo_url is defined
 
-- name: Include all YAML files from the remote vars_files directory
+- name: Include all YAML files from the remote vars_files directory "{{ managed_ansible_vars_repo_path }}"
   ansible.builtin.include_vars:
     dir: "{{ managed_ansible_vars_repo_path }}"
     ignore_unknown_extensions: true
