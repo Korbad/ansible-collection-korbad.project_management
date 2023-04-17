@@ -1,0 +1,23 @@
+---
+- name: Ensure managed_rust_crates_path directory exists with proper permissions
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_rust_crates_path }}"
+    mode: u=rwx,g-rwx,o-rwx
+
+- name: managed_rust_crate
+  include_role:
+    name: managed_rust_crate
+  loop: "{{ lookup('ansible.builtin.dict', managed_rust_crates, wantlist=True) }}"
+  vars:
+    collection_namespace: "{{ project.value.collection_namespace }}"
+    collection_name: "{{ project.value.collection_name }}"
+    git_url: "{{ project.value.git_url }}"
+    collection_subdir: "{{ project.value.collection_subdir | default('',true) }}"
+    depth: "{{ project.value.depth | default(false, true) }}"
+    single_branch: "{{ project.value.single_branch | default(false, true) }}"
+  loop_control:
+    label: "{{ project.value.git_url }}"
+    loop_var: project
+  when:
+  - managed_rust_crates is defined and managed_rust_crates is iterable

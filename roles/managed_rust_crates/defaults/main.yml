@@ -1,0 +1,2 @@
+managed_rust_crates_dirname: managed_rust_crates
+managed_rust_crates_path: "{{ (ansible_env.HOME, managed_rust_crates_dirname) | path_join }}"

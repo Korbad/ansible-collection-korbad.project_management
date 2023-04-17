@@ -1,0 +1,10 @@
+- name: Ensure rust crate directory exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ managed_rust_crates_path }}"
+
+- name: "Create {{ rust_crate_name }} Rust crate"
+  ansible.builtin.command:
+    cmd: "cargo new {{ rust_crate_name }}"
+    chdir: "{{ managed_rust_crates_path }}"
+    creates: "{{ managed_rust_crate_path }}"
