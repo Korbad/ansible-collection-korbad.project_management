@@ -1,5 +1,5 @@
 ---
-- name: Ensure clone of remote repo exists locally for giturl {{ git_url }}
+- name: "Ensure clone of remote repo exists locally for giturl {{ git_url }}"
   ansible.builtin.git:
     dest: "{{ managed_git_repo_path }}"
     repo: "{{ git_url }}"
