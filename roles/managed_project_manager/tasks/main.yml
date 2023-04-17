@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure the src directory exists for git repo {{ managed_project_manager_path }}
   file:
     state: directory
@@ -8,6 +7,7 @@
 - name: Ensure managed clone of git repo exists for korbad.project_management collection (this collection)
   include_role:
     name: managed_ansible_collection
+    public: true
   vars:
     git_url: "{{ project_manager_git_url }}"
     collection_namespace: korbad
