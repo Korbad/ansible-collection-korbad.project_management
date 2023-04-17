@@ -3,9 +3,6 @@
   include_role:
     name: managed_git_repo
     public: true
-  vars:
-    git_url: "{{ undef(hint='git_url is required to pull managed ansible vars repo') }}"
-    managed_git_repo_dirname: "{{ undef(hint='managed_git_repo_dirname is required to pull managed ansible vars repo') }}"
 
 - name: Load vars from managed ansible vars repo path
   include_role:
