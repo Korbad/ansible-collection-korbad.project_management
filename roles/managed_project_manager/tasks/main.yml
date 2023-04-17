@@ -13,3 +13,7 @@
     collection_namespace: korbad
     collection_name: project_management
     managed_ansible_collections_dirname: "{{ managed_project_manager_dirname }}"
+
+- name: Ensure fact is set for project manager path
+  set_fact:
+    project_manager_path: "{{ managed_ansible_collection_path }}"
