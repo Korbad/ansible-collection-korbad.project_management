@@ -1,21 +1,15 @@
 ---
-- name: Ensure the src directory exists for git repo {{ managed_ansible_vars_repo_path }}
-  file:
-    state: directory
-    path: "{{ managed_ansible_vars_repo_path }}"
+- name: Ensure Paychex vars repo exists locally
+  include_role:
+    name: managed_git_repo
+    public: true
+  vars:
+    git_url: "{{ undef(hint='git_url is required to pull managed ansible vars repo') }}"
+    managed_git_repo_dirname: "{{ undef(hint='managed_git_repo_dirname is required to pull managed ansible vars repo') }}"
 
-- name: Ensure clone of remote repo exists locally for giturl {{ ansible_vars_repo_url }}
-  ansible.builtin.git:
-    dest: "{{ managed_ansible_vars_repo_path }}"
-    repo: "{{ ansible_vars_repo_url }}"
-    force: true
-    update: true
-    accept_hostkey: yes
-  when: ansible_vars_repo_url is defined
-
-- name: Include all YAML files from the remote vars_files directory "{{ managed_ansible_vars_repo_path }}"
+- name: "Include all YAML files from the remote vars_files directory {{ managed_git_repo_path }}"
   ansible.builtin.include_vars:
-    dir: "{{ managed_ansible_vars_repo_path }}"
+    dir: "{{ managed_git_repo_path }}"
     ignore_unknown_extensions: true
     extensions:
       - yml

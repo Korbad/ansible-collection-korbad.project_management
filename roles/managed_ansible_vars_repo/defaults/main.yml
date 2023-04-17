@@ -1,2 +1,0 @@
-managed_ansible_vars_repo_dirname: managed_ansible_vars_repo
-managed_ansible_vars_repo_path: "{{ (ansible_env.HOME, managed_ansible_vars_repo_dirname) | path_join }}"
