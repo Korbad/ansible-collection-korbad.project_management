@@ -7,9 +7,8 @@
     git_url: "{{ undef(hint='git_url is required to pull managed ansible vars repo') }}"
     managed_git_repo_dirname: "{{ undef(hint='managed_git_repo_dirname is required to pull managed ansible vars repo') }}"
 
-- name: "Include all YAML files from the remote vars_files directory {{ managed_git_repo_path }}"
-  ansible.builtin.include_vars:
-    dir: "{{ managed_git_repo_path }}"
-    ignore_unknown_extensions: true
-    extensions:
-      - yml
+- name: Load vars from managed ansible vars repo path
+  include_role:
+    name: load_vars_from_path
+  vars:
+    load_vars_path: "{{ managed_git_repo_path }}"
