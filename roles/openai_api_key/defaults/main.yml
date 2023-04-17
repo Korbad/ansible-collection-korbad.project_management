@@ -1,0 +1,1 @@
+openai_api_key: "{{ lookup('file', managed_secrets_path+'/openai_api_key') }}"
