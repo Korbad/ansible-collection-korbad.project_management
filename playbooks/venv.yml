@@ -1,0 +1,8 @@
+---
+- name: Sets up minimal venv for use by development environment
+  hosts: localhost
+  roles:
+  - name: korbad.workstation.virtualenv
+  - name: korbad.project_management.venv_from_requirements_files
+    vars:
+      requirements_search_path: "{{ playbook_dir }}"
