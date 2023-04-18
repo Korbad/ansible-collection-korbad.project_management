@@ -1,4 +1,0 @@
-managed_secrets_dirname: managed_secrets
-managed_secrets_path: "{{ (ansible_env.HOME, managed_secrets_dirname) | path_join }}"
-awx_postgres_auth_password: "{{ lookup('file', managed_secrets_path+'/awx_postgres_auth_password') }}"
-awx_admin_password: "{{ lookup('file', managed_secrets_path+'/awx_admin_password') }}"
