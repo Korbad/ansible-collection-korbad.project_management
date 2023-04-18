@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: true
+  vars:
+    ansible_user: "{{ lookup('env','USER') }}"
+    ansible_connection: local
+  vars_prompt:
+  - name: github_personal_access_token
+    prompt: github personal access token?
+    private: true
+  roles:
+  - name: korbad.project_management.managed_secret
+    vars:
+      managed_secret_value: "{{ github_personal_access_token }}"
+      managed_secret_overwrite: true
+      managed_secret_name: github_personal_access_token
