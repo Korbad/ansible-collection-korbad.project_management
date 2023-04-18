@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: git_url
+    options:
+      git_url:
+        type: "str"
+        required: true
+        description: git_url

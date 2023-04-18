@@ -1,11 +1,9 @@
 ---
-- name: Set up minimal ansible development workstation
-  hosts: localhost
+- hosts: localhost
+  vars_prompt:
+  - name: git_url
+    prompt: git url of user vars?
   vars:
-    ansible_user: "{{ lookup('env', 'USER') }}"
-    ansible_connection: local
-  tasks:
-  - name: Ensure directory exists for managed user vars
-    include_role:
-      name: managed_user_vars
-  
+    current_user: "{{ lookup('env','USER') }}"
+  roles:
+  - name: korbad.project_management.managed_user_vars

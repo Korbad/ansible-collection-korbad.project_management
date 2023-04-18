@@ -1,0 +1,6 @@
+---
+- name: Ensure user vars repo exists
+  include_role:
+    name: managed_ansible_vars_repo
+  vars:
+    managed_git_repo_path: "{{ managed_user_vars_directory_path }}"
