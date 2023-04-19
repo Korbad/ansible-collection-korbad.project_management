@@ -1,0 +1,5 @@
+- name: Ensure managed_secrets directory exists {{ managed_secrets_path }}
+  file:
+    state: directory
+    path: "{{ managed_secrets_path }}"
+    recurse: yes
