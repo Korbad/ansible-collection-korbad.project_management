@@ -1,3 +1,4 @@
 ---
 dependencies:
+- managed_secrets
 - managed_vault_file
