@@ -4,7 +4,7 @@
     dest: "{{ managed_git_repo_path }}"
     repo: "{{ git_url }}"
     force: false
-    update: false
+    update: "{{ git_pull | default(false, true) }}"
     version: "{{ version | default(omit, true) }}"
     recursive: false
     depth: "{{ depth | default(omit, true) }}"
