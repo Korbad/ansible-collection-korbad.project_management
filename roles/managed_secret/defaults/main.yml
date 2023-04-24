@@ -1,4 +1,3 @@
-managed_secrets_dirname: managed_secrets
-managed_secrets_path: "{{ (ansible_env.HOME, managed_secrets_dirname) | path_join }}"
+
 managed_secret_path: "{{ (managed_secrets_path, managed_secret_name) | path_join }}"
 managed_secret_value: "{{ lookup('ansible.builtin.password', '/dev/null') }}"
