@@ -1,0 +1,6 @@
+- include_role:
+    name: managed_ansible_collections
+- include_role:
+    name: managed_ansible_roles
+- include_role:
+    name: managed_git_repos
