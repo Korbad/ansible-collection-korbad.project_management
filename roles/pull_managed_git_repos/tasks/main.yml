@@ -1,0 +1,12 @@
+- name: Pull git repos
+  include_role:
+    name: korbad.project_management.managed_git_repos
+    tasks_from: pull_repos
+- name: Pull managed_ansible_collections
+  include_role:
+    name: korbad.project_management.managed_ansible_collections
+    tasks_from: pull_repos
+- name: Pull managed_ansible_roles
+  include_role:
+    name: korbad.project_management.managed_ansible_roles
+    tasks_from: pull_repos
