@@ -8,17 +8,11 @@
     file:
       state: directory
       path: "{{ project_management_dir }}"
-
-  - block:
-    - name: Clone git repo
-      git:
-        repo: git@github.com:Korbad/ansible-collection-korbad.project_management.git
-        dest: "{{ project_management_dir }}"
-    rescue:
-    - name: Clone git repo (https)
-      git:
-        repo: https://github.com/Korbad/ansible-collection-korbad.project_management.git
-        dest: "{{ project_management_dir }}"
+      
+  - name: Clone git repo (https)
+    git:
+      repo: https://github.com/Korbad/ansible-collection-korbad.project_management.git
+      dest: "{{ project_management_dir }}"
 
   - name: Use the korbad.project_management collection to manage an instance of the korbad.project_management project itself
     command:
