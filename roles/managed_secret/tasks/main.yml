@@ -8,3 +8,6 @@
   include_tasks: create_and_encrypt.yml
   when: not managed_secret.stat.exists or managed_secret_overwrite|default(false,true)|bool
   
+- name: Ensure fact exists with managed secret value
+  set_fact:
+    "{{ managed_secret_name }}": "{{ lookup('file', managed_secret_path) }}"

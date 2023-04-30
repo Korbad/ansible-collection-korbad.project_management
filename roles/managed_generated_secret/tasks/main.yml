@@ -1,0 +1,6 @@
+---
+- name: Ensure managed secret exists
+  include_role:
+    name: managed_secret
+  vars:
+    managed_secret_type: generated
