@@ -1,0 +1,16 @@
+---
+- name: Managed var stat {{ managed_user_local_var_path }}
+  stat:
+    path: "{{ managed_user_local_var_path }}"
+  register: managed_user_local_var_file
+
+- debug:
+    var: managed_user_local_var_value
+
+- name: Create var file if it doesn't exist
+  include_tasks: prompt_and_create.yml
+  when: not managed_user_local_var_file.stat.exists or managed_user_local_var_overwrite|default(false,true)|bool
+  
+- name: Ensure fact exists with managed var value
+  set_fact:
+    "{{ managed_user_local_var_name }}": "{{ lookup('file', managed_user_local_var_path) }}" # TODO: we want to use the file on the remote host not on the ansible controller

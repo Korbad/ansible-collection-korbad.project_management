@@ -1,0 +1,4 @@
+- name: Ensure managed var is absent
+  file:
+    path: "{{ managed_user_local_var_path }}"
+    state: absent
