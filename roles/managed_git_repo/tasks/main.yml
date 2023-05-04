@@ -9,10 +9,6 @@
     recursive: false
     depth: "{{ depth | default(omit, true) }}"
     single_branch: "{{ single_branch | default(omit, true) }}"
-  ignore_errors: true
+    key_file: "{{ git_ssh_key_file_path | default(omit, true) }}"
+    accept_hostkey: true
   register: git_module_result
-
-- name: Check if the error is not related to an empty repository
-  ansible.builtin.fail:
-    msg: "The git module task failed for a reason other than an empty repository: {{ git_module_result }}"
-  when: git_module_result is failed and "pathspec" not in git_module_result.stderr
