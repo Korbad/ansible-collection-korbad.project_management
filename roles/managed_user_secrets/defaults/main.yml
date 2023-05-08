@@ -1,0 +1,2 @@
+managed_user_secrets_dirname: managed_user_secrets
+managed_user_secrets_path: "{{ (ansible_env.HOME, managed_user_secrets_dirname) | path_join }}"
