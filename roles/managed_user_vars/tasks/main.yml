@@ -9,6 +9,6 @@
   include_role:
     name: managed_ansible_vars_repo
   vars:
-    managed_git_repo_path: "{{ managed_user_vars_directory_path }}"
+    managed_git_repo_path: "{{ managed_user_vars__path }}"
     git_url: "{{ ansible_user_vars_git_url }}"
     git_pull: true

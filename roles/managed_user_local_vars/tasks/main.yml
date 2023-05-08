@@ -1,5 +1,5 @@
-- name: Ensure managed_user_local_vars directory exists {{ managed_user_local_vars_directory_path }}
+- name: Ensure managed_user_local_vars directory exists {{ managed_user_local_vars__path }}
   file:
     state: directory
-    path: "{{ managed_user_local_vars_directory_path }}"
+    path: "{{ managed_user_local_vars__path }}"
     recurse: yes
