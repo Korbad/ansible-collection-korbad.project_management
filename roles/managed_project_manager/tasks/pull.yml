@@ -1,6 +1,0 @@
----
-- name: Perform pull on self
-  command:
-    cmd: git pull
-    chdir: "{{ managed_project_manager_path }}"
-  failed_when: false
