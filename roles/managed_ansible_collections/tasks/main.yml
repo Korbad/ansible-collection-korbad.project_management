@@ -10,6 +10,7 @@
     collection_subdir: "{{ project.value.collection_subdir | default('',true) }}"
     depth: "{{ project.value.depth | default(false, true) }}"
     single_branch: "{{ project.value.single_branch | default(false, true) }}"
+    git_pull: "{{ project.value.git_pull | default(false, true) }}"
   loop_control:
     label: "{{ project.value.git_url }}"
     loop_var: project
