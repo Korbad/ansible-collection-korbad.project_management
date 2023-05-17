@@ -1,6 +1,13 @@
 ---
-- name: Ensure managed secret exists
-  include_role:
-    name: managed_secret
-  vars:
-    managed_secret_type: generated
+- name: Managed secret stat {{ managed_generated_secret_path }}
+  stat:
+    path: "{{ managed_generated_secret_path }}"
+  register: managed_generated_secret
+
+- name: Create secret file if it doesn't exist
+  include_tasks: create_and_encrypt.yml
+  when: not managed_generated_secret.stat.exists or managed_generated_secret_overwrite|default(false,true)|bool
+  
+- name: Ensure fact exists with managed secret value
+  set_fact:
+    "{{ managed_generated_secret_name }}": "{{ lookup('file', managed_generated_secret_path) }}"

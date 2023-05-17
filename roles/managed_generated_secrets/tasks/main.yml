@@ -1,0 +1,6 @@
+---
+- name: Ensure managed_generated_secrets directory exists {{ managed_generated_secrets_path }}
+  file:
+    state: directory
+    path: "{{ managed_generated_secrets_path }}"
+    recurse: yes

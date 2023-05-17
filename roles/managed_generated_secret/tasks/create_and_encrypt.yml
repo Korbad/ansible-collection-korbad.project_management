@@ -1,0 +1,10 @@
+- name: Create secret file
+  ansible.builtin.copy:
+    content: "{{ managed_generated_secret_value |  }}"
+    dest: "{{ managed_generated_secret_path }}"
+    mode: u+rw,og-rwx
+  no_log: true
+
+- name: Encrypt (ansible-vault) managed secret {{ managed_generated_secret_path }}
+  command:
+    cmd: ansible-vault encrypt {{ managed_generated_secret_path }} --vault-password-file {{ vault_password_file_path }}
