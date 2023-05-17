@@ -17,4 +17,4 @@
 
 - name: Encrypt (ansible-vault) managed secret {{ managed_secret_path }}
   command:
-    cmd: ansible-vault encrypt {{ managed_secret_path }} --vault-password-file {{ vault_password_file_path }}
+    cmd: ansible-vault encrypt {{ managed_secret_path }}
