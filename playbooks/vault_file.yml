@@ -1,5 +1,0 @@
----
-- name: Sets up ansible-vault and secret
-  hosts: localhost
-  roles:
-  - name: korbad.project_management.managed_vault_file
