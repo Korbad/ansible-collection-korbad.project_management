@@ -1,0 +1,20 @@
+---
+- name: "Find containerfile in {{ containerfiles_search_path }}"
+  find:
+    file_type: file
+    paths: "{{ containerfiles_search_path }}"
+    recurse: true
+    patterns:
+    - Dockerfile
+    depth: 2
+  register: containerfiles
+
+- name: For each containerfile found, perform create venv
+  include_role:
+    name: container_from_containerfile
+  loop: "{{ containerfiles.files }}"
+  loop_control:
+    loop_var: containerfile
+    label: "{{ containerfile.path }}"
+  vars:
+    containerfile_path: "{{ containerfile.path }}"

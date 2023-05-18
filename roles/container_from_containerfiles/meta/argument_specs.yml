@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: containerfile
+    options:
+      containerfiles_search_path:
+        type: "str"
+        required: true
+        description: Full path to search for containerfiles
