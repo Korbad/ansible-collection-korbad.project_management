@@ -4,6 +4,7 @@
     state: directory
     path: "{{ managed_vault_files_path }}"
     mode: u=rwx,g-rwx,o-rwx
+  no_log: true
 
 - name: Managed file stat {{ vault_password_file_path }}
   stat:
@@ -15,6 +16,7 @@
     content: "{{ lookup('ansible.builtin.password', '/dev/null chars=ascii_letters,digits,punctuation') }}"
     dest: "{{ vault_password_file_path }}"
     mode: u+rw,og-rwx
+  no_log: true
   when:
   - not managed_vault_password_file.stat.exists
 
@@ -23,3 +25,4 @@
     path: "{{ vault_password_file_path }}"
     state: file
     mode: u=rw,g-rwx,o-rwx
+  no_log: true

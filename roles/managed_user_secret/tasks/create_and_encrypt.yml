@@ -18,3 +18,4 @@
 - name: Encrypt (ansible-vault) managed secret {{ managed_user_secret_path }}
   command:
     cmd: ansible-vault encrypt {{ managed_user_secret_path }}
+  no_log: true

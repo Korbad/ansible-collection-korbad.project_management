@@ -2,6 +2,7 @@
 - name: Managed secret stat {{ managed_user_secret_path }}
   stat:
     path: "{{ managed_user_secret_path }}"
+  no_log: true
   register: managed_user_secret
 
 - name: Create secret file if it doesn't exist
@@ -11,3 +12,4 @@
 - name: Ensure fact exists with managed secret value
   set_fact:
     "{{ managed_user_secret_name }}": "{{ lookup('file', managed_user_secret_path) }}"
+  no_log: true

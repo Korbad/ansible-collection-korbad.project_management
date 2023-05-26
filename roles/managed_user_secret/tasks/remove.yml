@@ -2,3 +2,4 @@
   file:
     path: "{{ managed_user_secret_path }}"
     state: absent
+  no_log: true
