@@ -7,13 +7,13 @@
 - name: Create image from {{ containerfile_path }} for {{ container_name}}
   containers.podman.podman_image:
     path: "{{ containerfile_path | dirname }}"
-    name: "{{ container_name }}"
+    name: "{{ image_name }}"
     # force: true
 
 - name: Ensure container is running for {{ containerfile_path }}
   containers.podman.podman_container:
     name: "{{ container_name }}"
-    image: "{{ container_name }}"
+    image: "{{ image_name }}"
     state: started
     entrypoint: "{{ container_entrypoint | default(omit,true) }}"
     interactive: true
