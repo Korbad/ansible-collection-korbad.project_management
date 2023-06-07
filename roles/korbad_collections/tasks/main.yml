@@ -58,6 +58,11 @@
         collection_namespace: korbad
         collection_name: virtualization
         git_pull: true
+      korbad_auth:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.auth.git
+        collection_namespace: korbad
+        collection_name: auth
+        git_pull: true
       kewlfft_aur:
         git_url: https://github.com/kewlfft/ansible-aur.git
         collection_namespace: kewlfft
