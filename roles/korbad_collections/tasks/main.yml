@@ -18,6 +18,46 @@
         collection_namespace: korbad
         collection_name: vars
         git_pull: true
+      korbad_utils:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.utils.git
+        collection_namespace: korbad
+        collection_name: utils
+        git_pull: true
+      korbad_tools:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.tools.git
+        collection_namespace: korbad
+        collection_name: tools
+        git_pull: true
+      korbad_containers:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.containers.git
+        collection_namespace: korbad
+        collection_name: containers
+        git_pull: true
+      korbad_git_repos:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.git_repos.git
+        collection_namespace: korbad
+        collection_name: git_repos
+        git_pull: true
+      korbad_manage:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.manage.git
+        collection_namespace: korbad
+        collection_name: manage
+        git_pull: true
+      korbad_filesystem:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.filesystem.git
+        collection_namespace: korbad
+        collection_name: filesystem
+        git_pull: true
+      korbad_os:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.os.git
+        collection_namespace: korbad
+        collection_name: os
+        git_pull: true
+      korbad_virtualization:
+        git_url: git@github.com:Korbad/ansible-collection-korbad.virtualization.git
+        collection_namespace: korbad
+        collection_name: virtualization
+        git_pull: true
       kewlfft_aur:
         git_url: https://github.com/kewlfft/ansible-aur.git
         collection_namespace: kewlfft
