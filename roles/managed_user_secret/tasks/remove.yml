@@ -1,5 +1,0 @@
-- name: Ensure managed secret is absent
-  file:
-    path: "{{ managed_user_secret_path }}"
-    state: absent
-  no_log: true

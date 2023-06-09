@@ -1,1 +1,0 @@
-managed_secret_path: "{{ (managed_secrets_path, managed_secret_name) | path_join }}"

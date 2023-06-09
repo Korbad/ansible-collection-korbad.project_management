@@ -1,8 +1,0 @@
----
-argument_specs:
-  main:
-    short_description: managed_user_secret
-    options:
-      managed_user_secret_name:
-        type: "str"
-        description: managed_user_secret_name

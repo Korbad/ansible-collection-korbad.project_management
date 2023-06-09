@@ -1,2 +1,0 @@
-managed_generated_secrets_dirname: managed_generated_secrets
-managed_generated_secrets_path: "{{ (ansible_env.HOME, managed_generated_secrets_dirname) | path_join }}"

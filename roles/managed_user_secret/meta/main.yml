@@ -1,4 +1,0 @@
----
-dependencies:
-- managed_user_secrets
-- managed_vault_file
