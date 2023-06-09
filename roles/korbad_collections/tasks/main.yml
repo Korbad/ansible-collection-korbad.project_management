@@ -18,11 +18,11 @@
         collection_namespace: korbad
         collection_name: vars
         git_pull: true
-      korbad_utils:
-        git_url: git@github.com:Korbad/ansible-collection-korbad.utils.git
-        collection_namespace: korbad
-        collection_name: utils
-        git_pull: true
+      # korbad_utils:
+      #   git_url: git@github.com:Korbad/ansible-collection-korbad.utils.git
+      #   collection_namespace: korbad
+      #   collection_name: utils
+      #   git_pull: true
       korbad_tools:
         git_url: git@github.com:Korbad/ansible-collection-korbad.tools.git
         collection_namespace: korbad
