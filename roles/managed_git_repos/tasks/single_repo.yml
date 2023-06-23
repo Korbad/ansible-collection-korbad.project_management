@@ -1,14 +1,14 @@
 ---
-- name: Check entire repo before purge
-  include_tasks: checks/repo.yml
-
-- name: PURGE {{ source_path }}
-  file:
-    state: absent
-    path: "{{ source_path }}"
-  when:
-  - not unstaged_changes_detected
-  - not untracked_files_detected
-  - not git_stash_detected
-  - unpublished_changes_sum | int == 0
-  - not any_git_diff_complaints
+- name: "Ensure clone of remote repo exists locally for giturl {{ git_url }}"
+  ansible.builtin.git:
+    dest: "{{ managed_git_repo_path }}"
+    repo: "{{ git_url }}"
+    force: false
+    update: "{{ git_pull | default(false, true) }}"
+    version: "{{ version | default(omit, true) }}"
+    recursive: false
+    depth: "{{ depth | default(omit, true) }}"
+    single_branch: "{{ single_branch | default(omit, true) }}"
+    key_file: "{{ git_ssh_key_file_path | default(omit, true) }}"
+    accept_hostkey: true
+  register: git_module_result

@@ -1,9 +1,10 @@
 ---
 - name: Ensure vars repo exists locally
   include_role:
-    name: managed_git_repo
+    name: managed_git_repos
+    tasks_from: single_repo.yml
     public: true
-
+  
 - name: Load vars from managed ansible vars repo path
   include_role:
     name: load_vars_from_path

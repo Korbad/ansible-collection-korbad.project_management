@@ -6,7 +6,9 @@
 
 - name: Ensure git repo exists at {{ managed_ansible_collection_path }}
   include_role:
-    name: managed_git_repo
+    name: managed_git_repos
+    tasks_from: single_repo.yml
+    public: true
   vars:
     managed_git_repo_path: "{{ managed_ansible_collection_path }}"
 

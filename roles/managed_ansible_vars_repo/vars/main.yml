@@ -1,0 +1,1 @@
+managed_git_repo_path: "{{ (managed_git_repos_path, managed_git_repo_dirname) | path_join }}"

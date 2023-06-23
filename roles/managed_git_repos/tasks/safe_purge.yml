@@ -9,7 +9,7 @@
   register: git_repos
 
 - name: For each repo found, perform safe purge
-  include_tasks: single_repo.yml
+  include_tasks: safe_purge_single_repo.yml
   loop: "{{ git_repos.files }}"
   loop_control:
     loop_var: git_repo
