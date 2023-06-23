@@ -5,6 +5,6 @@
 
 - name: "Create {{ rust_crate_name }} Rust crate"
   ansible.builtin.command:
-    cmd: "cargo new {{ rust_crate_name }}"
+    cmd: "cargo new {{ rust_crate_name }} --bin"
     chdir: "{{ managed_rust_crates_path }}"
     creates: "{{ managed_rust_crate_path }}"
