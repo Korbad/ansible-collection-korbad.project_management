@@ -1,5 +1,0 @@
----
-containerfile_directory_path: "{{ containerfile_path | dirname }}"
-container_dir_name: .container
-container_path: "{{ (containerfile_directory_path, container_dir_name) | path_join }}"
-image_name: "{{ container_name }}"
