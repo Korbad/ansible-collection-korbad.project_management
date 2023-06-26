@@ -1,1 +1,0 @@
-managed_var_path: "{{ (managed_user_vars__path, managed_var_name) | path_join }}"
