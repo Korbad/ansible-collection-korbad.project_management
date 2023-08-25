@@ -20,11 +20,17 @@
     state: directory
     path: "{{ (user_collections_path, 'ansible_collections', collection_namespace) | path_join }}"
 
-- name: Ensure bind-mount exists between collection project directory and ansible collections path
-  ansible.builtin.mount:
+- name: Ensure symlink exists between collection project directory and ansible collections path
+  ansible.builtin.file:
     path: "{{ user_collection_path }}"
+    state: link
     src: "{{ (managed_ansible_collection_path, collection_subdir | default('')) | path_join }}"
-    opts: bind
-    fstype: none
-    state: mounted
-  become: true
+#
+#- name: Ensure bind-mount exists between collection project directory and ansible collections path
+#  ansible.builtin.mount:
+#    path: "{{ user_collection_path }}"
+#    src: "{{ (managed_ansible_collection_path, collection_subdir | default('')) | path_join }}"
+#    opts: bind
+#    fstype: none
+#    state: mounted
+#  become: true
