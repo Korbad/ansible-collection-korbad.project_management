@@ -1,2 +1,3 @@
+managed_user_content_path: "{{ ansible_env.HOME }}"
 managed_ansible_collections_dirname: managed_ansible_collections
-managed_ansible_collections_path: "{{ (ansible_env.HOME, managed_ansible_collections_dirname) | path_join }}"
+managed_ansible_collections_path: "{{ (managed_user_content_path, managed_ansible_collections_dirname) | path_join }}"

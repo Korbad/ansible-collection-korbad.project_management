@@ -1,2 +1,3 @@
+managed_user_content_path: "{{ ansible_env.HOME }}"
 managed_git_repos_dirname: managed_git_repos
-managed_git_repos_path: "{{ (ansible_env.HOME, managed_git_repos_dirname) | path_join }}"
+managed_git_repos_path: "{{ (managed_user_content_path, managed_git_repos_dirname) | path_join }}"
