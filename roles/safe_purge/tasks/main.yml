@@ -1,9 +1,0 @@
----
-- name: Safely purge all managed git repos (all version-controlled content)
-  include_role:
-    name: "{{ item }}"
-    tasks_from: safe_purge
-  loop:
-  - managed_git_repos
-  - managed_ansible_collections
-  - managed_ansible_roles
