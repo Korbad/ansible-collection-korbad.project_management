@@ -1,1 +1,0 @@
-managed_remote_host_files_path: "{{ (ansible_env.HOME, 'managed_remote_host_files') | path_join }}"

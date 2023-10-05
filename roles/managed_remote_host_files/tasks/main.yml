@@ -1,6 +1,0 @@
----
-- name: Ensure managed_remote_host_files directory exists with proper permissions
-  ansible.builtin.file:
-    state: directory
-    path: "{{ managed_remote_host_files_path }}"
-    mode: u=rwx,g-rwx,o-rwx
